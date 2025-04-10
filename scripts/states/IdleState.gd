@@ -2,6 +2,7 @@ extends State
 
 func enter():
 	player.animation_player.play("idle")
+	player.can_double_jump = false  # Reset double jump ability
 
 func physics_update(delta):
 	# Apply gravity

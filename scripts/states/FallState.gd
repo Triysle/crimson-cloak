@@ -12,10 +12,17 @@ func physics_update(delta):
 	
 	# Transition to idle or run when landing
 	if player.is_on_floor():
+		player.can_double_jump = false  # Reset double jump when landing
 		if abs(direction) > 0.1:
 			state_machine.transition_to("run")
 		else:
 			state_machine.transition_to("idle")
+		return
+	
+	# Check for double jump input
+	if Input.is_action_just_pressed("jump") and player.can_double_jump:
+		player.can_double_jump = false  # Prevent more than one double jump
+		state_machine.transition_to("doublejump")
 		return
 	
 	if direction != 0:

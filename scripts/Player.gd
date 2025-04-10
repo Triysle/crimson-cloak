@@ -9,6 +9,9 @@ extends CharacterBody2D
 # Get the gravity from the project settings to be synced with RigidBody nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+# State checks
+var can_double_jump = false
+
 @onready var sprite = $Sprite2D
 @onready var animation_player = $AnimationPlayer
 @onready var state_machine = $StateMachine

@@ -1,9 +1,8 @@
 extends State
 
 func enter():
-	player.animation_player.play("jump")
-	# Enable double jump when player jumps
-	player.can_double_jump = true
+	player.animation_player.play("jump")  # Reuse the jump animation for now
+	player.velocity.y = player.jump_velocity * 0.8  # Slightly weaker than first jump
 
 func physics_update(delta):
 	# Apply gravity
@@ -16,12 +15,6 @@ func physics_update(delta):
 	
 	# Get the input direction
 	var direction = Input.get_axis("move_left", "move_right")
-	
-	# Check for double jump input
-	if Input.is_action_just_pressed("jump") and player.can_double_jump:
-		player.can_double_jump = false  # Prevent more than one double jump
-		state_machine.transition_to("doublejump")
-		return
 	
 	if direction != 0:
 		# Apply acceleration (but maybe slightly reduced in air)
