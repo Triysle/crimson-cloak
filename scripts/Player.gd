@@ -9,8 +9,11 @@ extends CharacterBody2D
 # Get the gravity from the project settings to be synced with RigidBody nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-# State checks
-var can_double_jump = false
+# State vars
+var can_double_jump = false  # double jump checker
+var original_radius: float = 0.0  # slide state vars
+var original_height: float = 0.0  # slide state vars
+var original_position: Vector2 = Vector2.ZERO  # slide state vars
 
 @onready var sprite = $Sprite2D
 @onready var animation_player = $AnimationPlayer

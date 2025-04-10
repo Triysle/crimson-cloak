@@ -1383,7 +1383,6 @@ scale = Vector2(1.8, 1.35)
 texture = ExtResource("5_5ycvo")
 
 [node name="Collision" type="Node2D" parent="."]
-visible = false
 
 [node name="LeftWall" type="StaticBody2D" parent="Collision"]
 position = Vector2(8, 160)
