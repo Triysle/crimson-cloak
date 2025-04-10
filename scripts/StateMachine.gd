@@ -9,6 +9,9 @@ var current_state: State
 var states = {}
 
 func _ready():
+	# Wait until the next frame to ensure player is fully initialized
+	await get_tree().process_frame
+	
 	# Get the player reference
 	player = get_parent()
 	

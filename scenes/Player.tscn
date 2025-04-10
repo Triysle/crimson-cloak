@@ -322,3 +322,13 @@ script = ExtResource("9_lkdrv")
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("10_p7iby")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+process_callback = 0
+limit_left = 0
+limit_top = 0
+limit_right = 1152
+limit_bottom = 648
+limit_smoothed = true
+position_smoothing_enabled = true
