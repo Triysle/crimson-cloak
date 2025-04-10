@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bryfivf4t1wgy"]
+[gd_scene load_steps=21 format=3 uid="uid://bryfivf4t1wgy"]
 
 [ext_resource type="Script" uid="uid://caki06lsipjvu" path="res://scripts/Player.gd" id="1_v6fml"]
 [ext_resource type="Texture2D" uid="uid://cflg4c8he333p" path="res://assets/player/SS_Game_Player_v.1.0/idle/idle.png" id="2_3li8b"]
@@ -6,10 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://lu1jx1b2mnva" path="res://assets/player/SS_Game_Player_v.1.0/jump/jump.png" id="4_qu4a1"]
 [ext_resource type="Texture2D" uid="uid://b40b1symjq0uw" path="res://assets/player/SS_Game_Player_v.1.0/jump/jump_fall.png" id="5_70d11"]
 [ext_resource type="Script" uid="uid://nn3oeimt1pme" path="res://scripts/StateMachine.gd" id="6_6eyey"]
+[ext_resource type="Texture2D" uid="uid://dpvmfn4ny6mmh" path="res://assets/player/SS_Game_Player_v.1.0/slide/slide.png" id="6_o4126"]
 [ext_resource type="Script" uid="uid://bdaetsalkrc6b" path="res://scripts/states/IdleState.gd" id="7_d3wef"]
 [ext_resource type="Script" uid="uid://04qnds06b87i" path="res://scripts/states/RunState.gd" id="8_o4126"]
 [ext_resource type="Script" uid="uid://1gd4y4jb8klr" path="res://scripts/states/JumpState.gd" id="9_lkdrv"]
 [ext_resource type="Script" uid="uid://c4y7qhrssjdql" path="res://scripts/states/FallState.gd" id="10_p7iby"]
+[ext_resource type="Script" uid="uid://b7pb0odddy84f" path="res://scripts/states/SlideState.gd" id="11_d3wef"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8vuu"]
 radius = 8.0
@@ -281,13 +283,67 @@ tracks/3/keys = {
 "values": [1]
 }
 
+[sub_resource type="Animation" id="Animation_lkdrv"]
+resource_name = "slide"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_o4126")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g2els"]
 _data = {
 &"RESET": SubResource("Animation_g2els"),
 &"fall": SubResource("Animation_khinc"),
 &"idle": SubResource("Animation_3vyb7"),
 &"jump": SubResource("Animation_cw2d6"),
-&"run": SubResource("Animation_qu4a1")
+&"run": SubResource("Animation_qu4a1"),
+&"slide": SubResource("Animation_lkdrv")
 }
 
 [node name="Player" type="CharacterBody2D"]
@@ -308,6 +364,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_g2els")
 }
 
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+process_callback = 0
+limit_left = 0
+limit_top = 0
+limit_right = 1152
+limit_bottom = 648
+limit_smoothed = true
+position_smoothing_enabled = true
+
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("6_6eyey")
 
@@ -323,12 +389,5 @@ script = ExtResource("9_lkdrv")
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("10_p7iby")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-process_callback = 0
-limit_left = 0
-limit_top = 0
-limit_right = 1152
-limit_bottom = 648
-limit_smoothed = true
-position_smoothing_enabled = true
+[node name="Slide" type="Node" parent="StateMachine"]
+script = ExtResource("11_d3wef")

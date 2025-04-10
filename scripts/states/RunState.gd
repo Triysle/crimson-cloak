@@ -22,6 +22,11 @@ func physics_update(delta):
 			player.sprite.flip_h = false
 		elif direction < 0:
 			player.sprite.flip_h = true
+			
+		# Check for slide input - only allow sliding if we have some speed
+		if Input.is_action_just_pressed("slide") and abs(player.velocity.x) > player.speed * 0.5:
+			state_machine.transition_to("slide")
+			return
 	else:
 		# Transition to idle when no input
 		state_machine.transition_to("idle")
