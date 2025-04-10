@@ -23,9 +23,16 @@ func physics_update(delta):
 		return
 	
 	# Handle jump
+	# Handle jump
 	if Input.is_action_just_pressed("jump"):
-		player.velocity.y = player.jump_velocity
-		state_machine.transition_to("jump")
+		if Input.is_action_pressed("move_down") and player.is_on_floor():
+			# Use Godot's built-in one-way collision dropping
+			player.fall_through_platforms()
+			state_machine.transition_to("fall")
+		else:
+			# Normal jump
+			player.velocity.y = player.jump_velocity
+			state_machine.transition_to("jump")
 		return
 	
 	# Apply movement

@@ -23,3 +23,16 @@ var original_position: Vector2 = Vector2.ZERO  # slide state vars
 func _physics_process(_delta):
 	# No logic here, it's all in the states
 	pass
+
+func fall_through_platforms():
+	# Set velocity downward to start falling
+	velocity.y = 10
+	
+	# Get the current position
+	var current_pos = global_position
+	
+	# Move character down slightly to clear the platform collision
+	global_position.y += 1
+	
+	# Force platform detection to update
+	move_and_slide()
