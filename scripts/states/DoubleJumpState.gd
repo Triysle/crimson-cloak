@@ -29,5 +29,10 @@ func physics_update(delta):
 		# Apply air friction (less than ground friction)
 		player.velocity.x = move_toward(player.velocity.x, 0, player.friction * delta * 0.3)
 	
+	# Handle attack input in mid-air
+	if Input.is_action_just_pressed("attack"):
+		state_machine.transition_to("attack")
+		return
+	
 	# Apply movement
 	player.move_and_slide()

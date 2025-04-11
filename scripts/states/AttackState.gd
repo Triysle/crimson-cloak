@@ -10,10 +10,16 @@ var step_impulse = 100.0  # Impulse force for stepping forward
 var step_applied = false  # Track if we've applied the step for current attack
 
 func enter():
+	# Check if we're in the air
+	var in_air = not player.is_on_floor()	
+
 	# Check if we're starting a new attack sequence or continuing a combo
 	if player.state_machine.current_state.name != "Attack" || !combo_active:
 		current_attack = 1
 		combo_active = true
+	elif in_air && current_attack >= 2:
+		# Limit to only first two attacks in air
+		current_attack = 2
 	
 	# Play the appropriate attack animation
 	player.animation_player.play("attack" + str(current_attack))
@@ -42,26 +48,51 @@ func physics_update(delta):
 	# Apply gravity
 	if not player.is_on_floor():
 		player.velocity.y += player.gravity * delta
-	
-	# Get movement input
-	var direction = Input.get_axis("move_left", "move_right")
-	
-	# Apply step movement at specific point in the attack animation
-	if not step_applied and attack_timer > 0.1 and attack_timer < 0.15:
+		
+		# Get movement input (with reduced control in air)
+		var direction = Input.get_axis("move_left", "move_right")
 		if abs(direction) > 0.1:
-			# Apply step impulse in input direction
-			player.velocity.x = direction * step_impulse
+			# Apply air control (reduced compared to normal movement)
+			player.velocity.x = move_toward(player.velocity.x, direction * player.speed * 0.7, 
+										  player.acceleration * delta * 0.5)
 			
 			# Update player facing direction
 			if direction > 0:
 				player.sprite.flip_h = false
 			elif direction < 0:
 				player.sprite.flip_h = true
-				
-			step_applied = true
 	else:
-		# Apply friction to slow down after the step
-		player.velocity.x = move_toward(player.velocity.x, 0, player.friction * delta)
+		# Ground attack handling
+		# Get movement input
+		var direction = Input.get_axis("move_left", "move_right")
+		
+		# Apply step movement at specific point in the attack animation
+		if not step_applied and attack_timer > 0.1 and attack_timer < 0.15:
+			if abs(direction) > 0.1:
+				# Apply step impulse in input direction
+				player.velocity.x = direction * step_impulse
+				
+				# Update player facing direction
+				if direction > 0:
+					player.sprite.flip_h = false
+				elif direction < 0:
+					player.sprite.flip_h = true
+					
+				step_applied = true
+		else:
+			# Apply friction to slow down after the step
+			player.velocity.x = move_toward(player.velocity.x, 0, player.friction * delta)
+	
+	# Check for jump input during attack (including double jump)
+	if Input.is_action_just_pressed("jump"):
+		if player.is_on_floor():
+			player.velocity.y = player.jump_velocity
+			state_machine.transition_to("jump")
+			return
+		elif player.can_double_jump:
+			player.can_double_jump = false
+			state_machine.transition_to("doublejump")
+			return
 	
 	# Apply movement
 	player.move_and_slide()
