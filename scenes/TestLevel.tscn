@@ -1396,7 +1396,7 @@ shape = SubResource("RectangleShape2D_1fpmp")
 position = Vector2(8, 160)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/CenterColumn"]
-polygon = PackedVector2Array(536, 136, 552, 136, 552, 128, 584, 128, 584, 136, 600, 136, 600, 432, 536, 432)
+polygon = PackedVector2Array(536, 136, 552, 136, 552, 128, 584, 128, 584, 136, 600, 136, 600, 424, 568, 432, 536, 424)
 
 [node name="RightWall" type="StaticBody2D" parent="Collision"]
 position = Vector2(1144, 160)

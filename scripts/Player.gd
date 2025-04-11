@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # Player movement variables
-@export var speed: float = 300.0
+@export var speed: float = 200.0
 @export var jump_velocity: float = -400.0
 @export var acceleration: float = 2000.0
 @export var friction: float = 1000.0
@@ -29,10 +29,25 @@ func fall_through_platforms():
 	velocity.y = 10
 	
 	# Get the current position
-	var current_pos = global_position
+	var _current_pos = global_position
 	
 	# Move character down slightly to clear the platform collision
 	global_position.y += 1
 	
 	# Force platform detection to update
 	move_and_slide()
+
+
+func _on_animation_player_animation_finished(anim_name):
+	# Check if it's an attack animation that finished
+	if anim_name.begins_with("attack"):
+		# Check if we're in the attack state
+		if state_machine.current_state.name == "Attack":
+			var attack_state = state_machine.states["attack"]
+			# Try to continue to next combo
+			if not attack_state.next_combo():
+				# If no next combo, return to appropriate state
+				if is_on_floor():
+					state_machine.transition_to("idle")
+				else:
+					state_machine.transition_to("fall")

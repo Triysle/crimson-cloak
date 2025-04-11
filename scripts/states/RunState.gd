@@ -37,6 +37,11 @@ func physics_update(delta):
 		player.velocity.y = player.jump_velocity
 		state_machine.transition_to("jump")
 		return
-	
+
+	# Handle attack
+	if Input.is_action_just_pressed("attack"):
+		state_machine.transition_to("attack")
+		return
+
 	# Apply movement
 	player.move_and_slide()
