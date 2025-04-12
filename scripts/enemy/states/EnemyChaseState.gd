@@ -72,18 +72,6 @@ func physics_update(delta):
 	
 	if not enemy.is_on_floor():
 		enemy.debug_print("ChaseState detected not on floor")
-		
-	# Avoid falling off edges without platform
-	if edge_detection_enabled and enemy.is_on_floor():
-		var next_pos = enemy.global_position + Vector2(direction * 20, 0)
-		var space_state = enemy.get_world_2d().direct_space_state
-		var query = PhysicsRayQueryParameters2D.create(next_pos, next_pos + Vector2(0, 50))
-		query.collision_mask = 1  # Adjust to your collision layer
-		var result = space_state.intersect_ray(query)
-		
-		if result.is_empty():
-			enemy.debug_print("ChaseState: Edge detected, stopping horizontal movement")
-			enemy.velocity.x = 0
 	
 	# Debug if velocity doesn't match expected direction
 	if sign(enemy.velocity.x) != 0 and sign(enemy.velocity.x) != direction:

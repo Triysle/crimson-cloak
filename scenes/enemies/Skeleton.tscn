@@ -200,6 +200,8 @@ height = 50.0
 radius = 32.0
 
 [node name="Skeleton" instance=ExtResource("1_re5l2")]
+movement_speed = 50.0
+attack_range = 100.0
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(0, -32)
