@@ -27,7 +27,6 @@ func _ready():
 		current_state = states["idle"]
 		current_state.enter()
 		enemy.current_state_name = "idle"
-		enemy.debug_print("Initial state: idle")
 
 func _process(delta):
 	if current_state:
@@ -44,24 +43,14 @@ func _input(event):
 # Function to change state
 func transition_to(state_name: String):
 	if not states.has(state_name.to_lower()):
-		enemy.debug_print("ERROR: State " + state_name + " not found in state machine")
 		return
 		
 	if current_state:
 		if state_name.to_lower() == current_state.name.to_lower():
 			return
 		
-		enemy.debug_print("Transitioning from " + current_state.name + " to " + state_name)
-		# Debug velocity before state change
-		enemy.debug_print("  -> Velocity before state change: " + str(enemy.velocity))
-		
 		current_state.exit()
-	else:
-		enemy.debug_print("Transitioning from null to " + state_name)
 	
 	current_state = states[state_name.to_lower()]
 	enemy.current_state_name = state_name.to_lower()  # Update the tracking variable
 	current_state.enter()
-	
-	# Debug velocity after state change
-	enemy.debug_print("  -> Velocity after state change: " + str(enemy.velocity))

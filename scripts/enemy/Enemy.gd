@@ -21,12 +21,8 @@ var can_attack: bool = true
 var spawn_position: Vector2 = Vector2.ZERO
 var target: Node2D = null
 var facing_direction: int = 1  # 1 for right, -1 for left
-var current_state_name: String = "idle"  # Track current state for debugging
+var current_state_name: String = "idle"  # Track current state
 var idle_timer: float = 0.0
-
-# Debug tracking
-var _last_velocity = Vector2.ZERO
-var debug_enabled = true  # Set to false to disable debug prints
 
 # Node references
 @onready var sprite: Sprite2D = $Sprite2D
@@ -39,9 +35,6 @@ var debug_enabled = true  # Set to false to disable debug prints
 func _ready():
 	# Store the initial spawn position
 	spawn_position = global_position
-	
-	# Store initial velocity for debugging
-	_last_velocity = velocity
 	
 	# Set initial facing direction
 	facing_direction = 1
@@ -65,8 +58,6 @@ func _ready():
 	# Ensure attack box is initially disabled
 	if attack_box.has_node("CollisionShape2D"):
 		attack_box.get_node("CollisionShape2D").disabled = true
-	
-	debug_print("Enemy initialized with movement_speed: " + str(movement_speed))
 
 func update_facing(direction: float):
 	if direction == 0:
@@ -77,7 +68,6 @@ func update_facing(direction: float):
 	# Only update if facing direction changed
 	if new_facing != facing_direction:
 		facing_direction = new_facing
-		debug_print("Changed facing direction to: " + str(facing_direction))
 		
 		# Update sprite facing
 		sprite.flip_h = (facing_direction < 0)
@@ -97,7 +87,6 @@ func _on_detection_area_body_entered(body):
 	if body.is_in_group("player"):
 		player_detected = true
 		target = body
-		debug_print("Player detected!")
 		
 		# Only transition to chase if we're in idle or wander state
 		if current_state_name == "idle" or current_state_name == "wander":
@@ -106,43 +95,19 @@ func _on_detection_area_body_entered(body):
 func _on_detection_area_body_exited(body):
 	if body.is_in_group("player"):
 		player_detected = false
-		debug_print("Player lost from detection area")
 		# Keep the target reference so we can track last known position
 
 func _physics_process(delta):
-	# Store previous velocity for debugging
-	var old_velocity = velocity
-	
 	# Apply gravity if not on floor
 	if not is_on_floor() and current_state_name != "attack":
 		velocity.y += gravity * delta
 	
-	# Track velocity changes before move_and_slide
-	if old_velocity.x != 0 and velocity.x == 0:
-		debug_print("Velocity.x zeroed BEFORE move_and_slide in state: " + current_state_name)
-	
 	# The actual behavior will be in the state scripts
-	var collision = move_and_slide()
-	
-	# Check if velocity was zeroed by move_and_slide
-	if old_velocity.x != 0 and velocity.x == 0:
-		debug_print("Velocity.x zeroed by move_and_slide. Hit something in state: " + current_state_name)
-		if is_on_wall():
-			debug_print("  -> Hit a wall")
-	
-	# Debug changes in velocity
-	if _last_velocity.x != velocity.x:
-		debug_print("Velocity.x changed from " + str(_last_velocity.x) + " to " + str(velocity.x) + " in state: " + current_state_name)
-		_last_velocity = velocity
-
-func debug_print(message: String):
-	if debug_enabled:
-		print("[Enemy:" + name + "] " + message)
+	move_and_slide()
 
 # Functions for receiving damage
 func take_damage(amount: int):
 	health -= amount
-	debug_print("Took " + str(amount) + " damage. Health: " + str(health))
 	
 	if health <= 0:
 		die()
@@ -152,7 +117,6 @@ func take_damage(amount: int):
 			animation_player.play("hit")
 
 func die():
-	debug_print("Died")
 	# Will be overridden by child classes if needed
 	if animation_player.has_animation("dead"):
 		animation_player.play("dead")
@@ -173,5 +137,4 @@ func drop_loot():
 
 func _on_attack_box_body_entered(body):
 	if body.is_in_group("player") and body.has_method("take_damage"):
-		debug_print("Attack hit player")
 		body.take_damage(damage)
