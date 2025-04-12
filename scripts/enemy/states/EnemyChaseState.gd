@@ -19,7 +19,7 @@ func physics_update(delta):
 	
 	# Update sprite direction
 	if direction != 0:
-		enemy.sprite.flip_h = (direction < 0)
+		enemy.update_facing(direction)
 	
 	# Move towards player
 	enemy.velocity.x = move_toward(enemy.velocity.x, direction * enemy.movement_speed, enemy.acceleration * delta)

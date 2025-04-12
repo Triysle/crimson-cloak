@@ -15,7 +15,7 @@ func enter():
 	direction = [-1, 1][randi() % 2]
 	
 	# Update sprite facing
-	enemy.sprite.flip_h = (direction < 0)
+	enemy.update_facing(direction)
 
 func physics_update(delta):
 	# Apply gravity if not on floor

@@ -19,7 +19,8 @@ class_name Enemy
 var player_detected: bool = false
 var can_attack: bool = true
 var spawn_position: Vector2 = Vector2.ZERO
-var target: Node2D = null  # Reference to the player or other target
+var target: Node2D = null
+var original_sprite_position_x: float = 0.0
 
 # Node references
 @onready var sprite: Sprite2D = $Sprite2D
@@ -33,6 +34,9 @@ func _ready():
 	# Store the initial spawn position
 	spawn_position = global_position
 	
+	# Store the original sprite X position
+	original_sprite_position_x = sprite.position.x
+	
 	# Adjust the detection area
 	var detection_shape = detection_area.get_node("CollisionShape2D")
 	if detection_shape and detection_shape.shape is CircleShape2D:
@@ -42,7 +46,13 @@ func _ready():
 	detection_area.connect("body_entered", Callable(self, "_on_detection_area_body_entered"))
 	detection_area.connect("body_exited", Callable(self, "_on_detection_area_body_exited"))
 
-# Add these new functions for player detection
+func update_facing(direction: float):
+	if direction == 0:
+		return
+		
+	sprite.flip_h = (direction < 0)
+	sprite.position.x = original_sprite_position_x * (1 if direction > 0 else -1)
+
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("player"):
 		player_detected = true

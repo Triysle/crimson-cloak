@@ -39,7 +39,7 @@ func physics_update(delta):
 	# Face the player
 	var direction = sign(enemy.target.global_position.x - enemy.global_position.x)
 	if direction != 0:
-		enemy.sprite.flip_h = (direction < 0)
+		enemy.update_facing(direction)
 	
 	# End attack after duration
 	if attack_timer >= attack_duration:
