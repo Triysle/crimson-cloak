@@ -6,6 +6,10 @@ extends CharacterBody2D
 @export var acceleration: float = 2000.0
 @export var friction: float = 1000.0
 
+#Player stats
+@export var max_health: int = 100
+@export var health: int = 100
+
 # Get the gravity from the project settings to be synced with RigidBody nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -37,6 +41,9 @@ func fall_through_platforms():
 	# Force platform detection to update
 	move_and_slide()
 
+func take_damage(amount: int):
+	health -= amount
+	print("Player took ", amount, " damage! Health: ", health)
 
 func _on_animation_player_animation_finished(anim_name):
 	# Check if it's an attack animation that finished

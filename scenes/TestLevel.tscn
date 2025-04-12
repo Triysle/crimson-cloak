@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://q38lunwb3chr"]
+[gd_scene load_steps=20 format=4 uid="uid://q38lunwb3chr"]
 
 [ext_resource type="Texture2D" uid="uid://boycs7bxs2vi7" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background1.png" id="1_5n3yh"]
 [ext_resource type="PackedScene" uid="uid://bryfivf4t1wgy" path="res://scenes/Player.tscn" id="1_dojpo"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cnbblpyf8p8s5" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background5.png" id="5_5ycvo"]
 [ext_resource type="Texture2D" uid="uid://dkqo6h04od3wt" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/MainLevBuild.png" id="6_0n17k"]
 [ext_resource type="Texture2D" uid="uid://cikgynx6ooius" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Decoratives.png" id="7_g3y3g"]
+[ext_resource type="PackedScene" uid="uid://bqineexqltu6i" path="res://scenes/enemies/Skeleton.tscn" id="9_6e24c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1fpmp"]
 size = Vector2(16, 872)
@@ -1440,6 +1441,9 @@ tile_set = SubResource("TileSet_6e24c")
 
 [node name="Player" parent="." instance=ExtResource("1_dojpo")]
 position = Vector2(304, 448)
+
+[node name="Skeleton" parent="." instance=ExtResource("9_6e24c")]
+position = Vector2(984, 608)
 
 [node name="FrontTiles" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAARABIAAQABABEAAAASABIAAQACABEAAAAAABIAAgABAA0AAAAAABMAAgABAA4AAAABABIAAgACAA0AAAABABMAAgACAA4AAAACABIAAgADAA0AAAACABMAAgADAA4AAAADABIAAgAEAA0AAAADABMAAgAEAA4AAAAEABIAAgAFAA0AAAAEABMAAgAFAA4AAAAFABIAAgAGAA0AAAAFABMAAgAGAA4AAAA=")

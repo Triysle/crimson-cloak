@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://71g8rdqj571m" path="res://scripts/enemy/Enemy.gd" id="1_3gvst"]
 [ext_resource type="Script" uid="uid://hgje3f4nf1ag" path="res://scripts/enemy/EnemyStateMachine.gd" id="2_55jtl"]
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+texture_filter = 1
 script = ExtResource("1_3gvst")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -13,14 +14,18 @@ script = ExtResource("1_3gvst")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 
 [node name="HitBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 
 [node name="AttackBox" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
 

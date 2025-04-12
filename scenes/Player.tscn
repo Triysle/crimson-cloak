@@ -513,7 +513,7 @@ _data = {
 &"slide": SubResource("Animation_lkdrv")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 texture_filter = 1
 script = ExtResource("1_v6fml")
 

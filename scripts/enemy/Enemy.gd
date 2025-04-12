@@ -89,3 +89,8 @@ func die():
 func drop_loot():
 	# Will be implemented in child classes
 	pass
+
+
+func _on_attack_box_body_entered(body):
+	if body.is_in_group("player") and body.has_method("take_damage"):
+		body.take_damage(damage)
