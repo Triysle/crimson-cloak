@@ -51,7 +51,9 @@ func update_facing(direction: float):
 		return
 		
 	sprite.flip_h = (direction < 0)
-	sprite.position.x = original_sprite_position_x * (1 if direction > 0 else -1)
+	
+	var original_abs_x = abs(original_sprite_position_x)
+	sprite.position.x = original_abs_x * (1 if direction > 0 else -1)
 
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("player"):
