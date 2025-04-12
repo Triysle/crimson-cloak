@@ -22,10 +22,10 @@ var spawn_position: Vector2 = Vector2.ZERO
 var target: Node2D = null
 var facing_direction: int = 1  # 1 for right, -1 for left
 var current_state_name: String = "idle"  # Track current state for debugging
+var idle_timer: float = 0.0
 
 # Debug tracking
 var _last_velocity = Vector2.ZERO
-var _last_velocity_setter = ""
 var debug_enabled = true  # Set to false to disable debug prints
 
 # Node references

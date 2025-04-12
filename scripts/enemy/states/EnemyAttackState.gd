@@ -25,6 +25,10 @@ func exit():
 	enemy.can_attack = false
 	can_attack_again = false
 	
+	# Explicitly disable the attack box collision shape
+	if enemy.attack_box and enemy.attack_box.has_node("CollisionShape2D"):
+		enemy.attack_box.get_node("CollisionShape2D").disabled = true
+	
 	# Start a timer to re-enable attacks
 	var timer = get_tree().create_timer(attack_cooldown)
 	timer.timeout.connect(func(): enemy.can_attack = true)
