@@ -4,6 +4,10 @@ func enter():
 	player.animation_player.play("fall")
 
 func physics_update(delta):
+	# Skip input processing if player can't be controlled
+	if not player.can_control:
+		return
+		
 	# Apply gravity
 	player.velocity.y += player.gravity * delta
 	

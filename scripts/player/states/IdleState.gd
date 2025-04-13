@@ -5,6 +5,10 @@ func enter():
 	player.can_double_jump = false  # Reset double jump ability
 
 func physics_update(delta):
+	# Skip input processing if player can't be controlled
+	if not player.can_control:
+		return
+		
 	# Apply gravity
 	if not player.is_on_floor():
 		player.velocity.y += player.gravity * delta

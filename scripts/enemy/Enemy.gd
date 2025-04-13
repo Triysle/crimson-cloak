@@ -137,4 +137,5 @@ func drop_loot():
 
 func _on_attack_box_body_entered(body):
 	if body.is_in_group("player") and body.has_method("take_damage"):
-		body.take_damage(damage)
+		# Pass our position to determine hit direction
+		body.take_damage(damage, global_position)

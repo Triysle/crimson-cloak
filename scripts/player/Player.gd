@@ -18,6 +18,8 @@ var can_double_jump = false  # double jump checker
 var original_radius: float = 0.0  # slide state vars
 var original_height: float = 0.0  # slide state vars
 var original_position: Vector2 = Vector2.ZERO  # slide state vars
+var hit_direction = 1.0  # Direction the player was hit from (positive = right, negative = left)
+var can_control = true   # Whether the player can be controlled (disabled during hurt state)
 
 @onready var sprite = $Sprite2D
 @onready var animation_player = $AnimationPlayer
@@ -41,9 +43,33 @@ func fall_through_platforms():
 	# Force platform detection to update
 	move_and_slide()
 
-func take_damage(amount: int):
+func take_damage(amount: int, attacker_position: Vector2 = Vector2.ZERO):
+	# Skip damage if player is already in hurt state
+	if state_machine.current_state.name.to_lower() == "hurt":
+		return
+		
 	health -= amount
 	print("Player took ", amount, " damage! Health: ", health)
+	
+	# Determine hit direction (from attacker to player)
+	if attacker_position != Vector2.ZERO:
+		hit_direction = sign(global_position.x - attacker_position.x)
+		if hit_direction == 0:
+			hit_direction = 1.0  # Default right if directly above/below
+	else:
+		# If no attacker position provided, use opposite of player facing
+		hit_direction = 1.0 if sprite.flip_h else -1.0
+	
+	# Transition to hurt state
+	state_machine.transition_to("hurt")
+	
+	# Check if player has died
+	if health <= 0:
+		health = 0
+		print("Player died!")
+		# You can handle death here (could transition to a death state)
+		# For now, just reset health
+		health = max_health
 
 func _on_animation_player_animation_finished(anim_name):
 	# Check if it's an attack animation that finished

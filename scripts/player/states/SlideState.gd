@@ -41,6 +41,10 @@ func exit():
 	collision_shape.position = player.original_position
 
 func physics_update(delta):
+	# Skip input processing if player can't be controlled
+	if not player.can_control:
+		return
+		
 	# Increment timer
 	slide_timer += delta
 	

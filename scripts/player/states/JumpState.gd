@@ -6,6 +6,10 @@ func enter():
 	player.can_double_jump = true
 
 func physics_update(delta):
+	# Skip input processing if player can't be controlled
+	if not player.can_control:
+		return
+		
 	# Apply gravity
 	player.velocity.y += player.gravity * delta
 	
