@@ -112,9 +112,24 @@ func take_damage(amount: int):
 	if health <= 0:
 		die()
 	else:
+		# Interrupt current actions
+		velocity.x = 0
+		
 		# Play hit animation/sound
 		if animation_player.has_animation("hit"):
 			animation_player.play("hit")
+			
+		# Add a small knockback
+		velocity.x = -facing_direction * 100
+		
+		# Return to idle after the hit animation finishes
+		await animation_player.animation_finished
+		
+		# If we were chasing the player, resume chase
+		if player_detected and target != null:
+			state_machine.transition_to("chase")
+		else:
+			state_machine.transition_to("idle")
 
 func die():
 	# Will be overridden by child classes if needed
