@@ -33,11 +33,23 @@ var idle_timer: float = 0.0
 @onready var attack_box: Area2D = $AttackBox
 
 func _ready():
+	# Debug print
+	print("Enemy _ready called")
+	print("Starting in group enemy: ", is_in_group("enemy"))
+	
 	# Store the initial spawn position
 	spawn_position = global_position
 	
 	# Set initial facing direction
 	facing_direction = 1
+	
+	# Add to the "enemy" group if not already in it
+	if not is_in_group("enemy"):
+		print("Adding enemy to 'enemy' group")
+		add_to_group("enemy")
+	
+	# Debug - confirm we're in the group
+	print("After _ready, in group enemy: ", is_in_group("enemy"))
 	
 	# Adjust the detection area
 	var detection_shape = detection_area.get_node("CollisionShape2D")
@@ -58,6 +70,12 @@ func _ready():
 	# Ensure attack box is initially disabled
 	if attack_box.has_node("CollisionShape2D"):
 		attack_box.get_node("CollisionShape2D").disabled = true
+	
+	# Debug collision info
+	await get_tree().create_timer(1.0).timeout
+	print("Enemy collision layer: ", collision_layer)
+	print("Enemy HitBox collision layer: ", hit_box.collision_layer if hit_box else "No HitBox")
+	print("Enemy HitBox collision mask: ", hit_box.collision_mask if hit_box else "No HitBox")
 
 func update_facing(direction: float):
 	if direction == 0:
@@ -107,6 +125,7 @@ func _physics_process(delta):
 
 # Functions for receiving damage
 func take_damage(amount: int):
+	print("Enemy took ", amount, " damage!")
 	health -= amount
 	
 	if health <= 0:
@@ -117,6 +136,7 @@ func take_damage(amount: int):
 		
 		# Play hit animation/sound
 		if animation_player.has_animation("hit"):
+			print("Playing hit animation")
 			animation_player.play("hit")
 			
 		# Add a small knockback
@@ -132,6 +152,7 @@ func take_damage(amount: int):
 			state_machine.transition_to("idle")
 
 func die():
+	print("Enemy died!")
 	# Will be overridden by child classes if needed
 	if animation_player.has_animation("dead"):
 		animation_player.play("dead")

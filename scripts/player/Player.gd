@@ -21,14 +21,39 @@ var original_position: Vector2 = Vector2.ZERO  # slide state vars
 var hit_direction = 1.0  # Direction the player was hit from (positive = right, negative = left)
 var can_control = true   # Whether the player can be controlled (disabled during hurt state)
 
+# Debug variables
+var debug_timer = 0.0
+
 @onready var sprite = $Sprite2D
 @onready var animation_player = $AnimationPlayer
 @onready var state_machine = $StateMachine
 
 func _ready():
+	# Debug prints
+	print("Player _ready called")
+	
 	var attack_box = $AttackBox
+	print("AttackBox found: ", attack_box != null)
+	
 	if attack_box and !attack_box.body_entered.is_connected(_on_attack_box_body_entered):
 		attack_box.body_entered.connect(_on_attack_box_body_entered)
+		print("AttackBox signal connected")
+	
+	# Let's also add a simple timer to print our collision mask/layer for debugging
+	await get_tree().create_timer(1.0).timeout
+	print("Player collision layer: ", collision_layer)
+	print("AttackBox collision layer: ", $AttackBox.collision_layer if $AttackBox else "No AttackBox")
+	print("AttackBox collision mask: ", $AttackBox.collision_mask if $AttackBox else "No AttackBox")
+
+# Debug function to help see what's happening
+func _process(delta):
+	# Basic debug info every second
+	debug_timer += delta
+	if debug_timer >= 1.0:
+		debug_timer = 0.0
+		var attack_box = $AttackBox
+		if attack_box and attack_box.has_node("CollisionShape2D"):
+			print("AttackBox CollisionShape2D disabled: ", attack_box.get_node("CollisionShape2D").disabled)
 
 # The physics_process is now much simpler as states handle the logic
 func _physics_process(_delta):

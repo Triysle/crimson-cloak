@@ -11,6 +11,7 @@ var step_applied = false  # Track if we've applied the step for current attack
 var hit_enemies = [] # Track which enemies we've hit in this attack to prevent multiple hits
 
 func enter():
+	print("Enter attack state")
 	# Check if we're in the air
 	var in_air = not player.is_on_floor()	
 
@@ -23,7 +24,9 @@ func enter():
 		current_attack = 2
 	
 	# Play the appropriate attack animation
-	player.animation_player.play("attack" + str(current_attack))
+	var animation_name = "attack" + str(current_attack)
+	print("Playing animation: ", animation_name)
+	player.animation_player.play(animation_name)
 	
 	attack_timer = 0.0
 	can_combo = false  # Initially can't combo until animation reaches combo window
@@ -34,6 +37,7 @@ func enter():
 	hit_enemies.clear()
 
 func exit():
+	print("Exit attack state")
 	# When exiting the attack state completely, reset combo state
 	combo_active = false
 
@@ -122,10 +126,12 @@ func next_combo():
 func update_attack_hitbox():
 	var attack_box = player.get_node_or_null("AttackBox")
 	if not attack_box:
+		print("No AttackBox found!")
 		return
 		
 	var collision_shape = attack_box.get_node_or_null("CollisionShape2D")
 	if not collision_shape:
+		print("No CollisionShape2D found in AttackBox!")
 		return
 	
 	# Update attack box position based on player direction
@@ -142,18 +148,3 @@ func update_attack_hitbox():
 		collision_shape.disabled = false
 	else:
 		collision_shape.disabled = true
-
-func _on_attack_box_body_entered(body):
-	if body.is_in_group("enemy") and not hit_enemies.has(body):
-		hit_enemies.append(body)
-		
-		# Calculate damage based on current attack in combo
-		var damage = 10  # Base damage
-		if current_attack == 2:
-			damage = 15
-		elif current_attack == 3:
-			damage = 20
-			
-		# Call the enemy's take_damage method
-		if body.has_method("take_damage"):
-			body.take_damage(damage)
