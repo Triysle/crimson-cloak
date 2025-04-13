@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://q6e6dqdqhxkn" path="res://assets/player/SS_Game_Player_v.1.0/dust_jump/dust_jump.png" id="1_dsn2j"]
 [ext_resource type="Texture2D" uid="uid://dutkl3ratmy2t" path="res://assets/player/SS_Game_Player_v.1.0/dust_land/dust_land.png" id="2_3darp"]
-[ext_resource type="Script" uid="uid://cexcvuewex3v1" path="res://scenes/DustEffect.gd" id="3_3darp"]
+[ext_resource type="Script" uid="uid://cexcvuewex3v1" path="res://scripts/player/DustEffect.gd" id="3_3darp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qriej"]
 atlas = ExtResource("1_dsn2j")

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <!-- Base coin shape -->
+  <circle cx="8" cy="8" r="7.5" fill="#b87333" stroke="#8b4513" stroke-width="0.5"/>
+  
+  <!-- Depth effect (inner gradient) -->
+  <circle cx="8" cy="8" r="6.5" fill="#cd7f32" stroke="#a0522d" stroke-width="0.5"/>
+  <circle cx="8" cy="8" r="5" fill="#d2691e" stroke="none"/>
+  
+  <!-- Highlight to create 3D effect -->
+  <circle cx="6" cy="6" r="2" fill="#daa520" opacity="0.5"/>
+  
+  <!-- Ancient markings -->
+  <!-- Central symbol -->
+  <path d="M8 4 L10 8 L8 12 L6 8 Z" fill="none" stroke="#704214" stroke-width="0.7"/>
+  
+  <!-- Worn edge effect -->
+  <path d="M3 8 A 5 5 0 0 0 13 8" fill="none" stroke="#704214" stroke-width="0.5" opacity="0.6" stroke-dasharray="1,1"/>
+  <path d="M13 8 A 5 5 0 0 0 3 8" fill="none" stroke="#704214" stroke-width="0.5" opacity="0.6" stroke-dasharray="1,1"/>
+</svg>

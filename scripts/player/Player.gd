@@ -24,6 +24,10 @@ var can_control = true   # Whether the player can be controlled (disabled during
 # Debug variables
 var debug_timer = 0.0
 
+# HUD variables
+var currency = 0
+var hud = null
+
 @onready var sprite = $Sprite2D
 @onready var animation_player = $AnimationPlayer
 @onready var state_machine = $StateMachine
@@ -47,6 +51,18 @@ func _ready():
 	print("Player collision layer: ", collision_layer)
 	print("AttackBox collision layer: ", $AttackBox.collision_layer if $AttackBox else "No AttackBox")
 	print("AttackBox collision mask: ", $AttackBox.collision_mask if $AttackBox else "No AttackBox")
+
+	# Find the HUD in the scene
+	await get_tree().process_frame
+	hud = get_tree().get_first_node_in_group("hud")
+	
+	# Get direct reference to our HUD child
+	hud = $HUD
+	
+	# Update HUD with initial values
+	if hud:
+		hud.update_health(health, max_health)
+		hud.update_currency(currency)
 
 # Debug function to help see what's happening
 func _process(delta):
@@ -83,6 +99,10 @@ func take_damage(amount: int, attacker_position: Vector2 = Vector2.ZERO):
 		
 	health -= amount
 	print("Player took ", amount, " damage! Health: ", health)
+
+	# Update the HUD
+	if hud:
+		hud.update_health(health, max_health)
 	
 	# Determine hit direction (from attacker to player)
 	if attacker_position != Vector2.ZERO:
@@ -162,3 +182,16 @@ func spawn_dust_effect(animation_name: String):
 	dust.play(animation_name)
 	# Add to the current scene
 	get_tree().current_scene.add_child(dust)
+
+func add_currency(amount: int):
+	currency += amount
+	print("Added ", amount, " currency! Total: ", currency)
+	
+	# Update the HUD
+	if hud:
+		hud.update_currency(currency)
+
+func set_ability(ability_texture):
+	# Update the HUD
+	if hud:
+		hud.set_ability_icon(ability_texture)
