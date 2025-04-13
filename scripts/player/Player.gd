@@ -25,6 +25,11 @@ var can_control = true   # Whether the player can be controlled (disabled during
 @onready var animation_player = $AnimationPlayer
 @onready var state_machine = $StateMachine
 
+func _ready():
+	var attack_box = $AttackBox
+	if attack_box and !attack_box.body_entered.is_connected(_on_attack_box_body_entered):
+		attack_box.body_entered.connect(_on_attack_box_body_entered)
+
 # The physics_process is now much simpler as states handle the logic
 func _physics_process(_delta):
 	# No logic here, it's all in the states
@@ -84,3 +89,25 @@ func _on_animation_player_animation_finished(anim_name):
 					state_machine.transition_to("idle")
 				else:
 					state_machine.transition_to("fall")
+
+func _on_attack_box_body_entered(body):
+	if body.is_in_group("enemy") and state_machine.current_state.name.to_lower() == "attack":
+		# Get the current attack state
+		var attack_state = state_machine.states["attack"]
+		
+		# Make sure we don't hit the same enemy multiple times in one attack
+		if attack_state.hit_enemies.has(body):
+			return
+			
+		attack_state.hit_enemies.append(body)
+		
+		# Calculate damage based on current attack in combo
+		var damage = 10  # Base damage
+		if attack_state.current_attack == 2:
+			damage = 15
+		elif attack_state.current_attack == 3:
+			damage = 20
+			
+		# Call the enemy's take_damage method
+		if body.has_method("take_damage"):
+			body.take_damage(damage)
