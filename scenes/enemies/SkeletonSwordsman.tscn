@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://soit815ldxsc"]
+[gd_scene load_steps=50 format=3 uid="uid://soit815ldxsc"]
 
 [ext_resource type="Script" uid="uid://bld4bam1vxlmc" path="res://scripts/enemies/SkeletonSwordsman.gd" id="1_b81lu"]
 [ext_resource type="Texture2D" uid="uid://dmug5l8481i26" path="res://assets/enemies/HeroandOpponents_v1/1 Enemy/PNG/idle-1.png" id="2_1fi22"]
@@ -33,6 +33,10 @@
 [ext_resource type="Texture2D" uid="uid://cjaajy0w0riyh" path="res://assets/enemies/HeroandOpponents_v1/1 Enemy/PNG/walk-4.png" id="31_i0gwl"]
 [ext_resource type="Texture2D" uid="uid://ct2aw25w38ud3" path="res://assets/enemies/HeroandOpponents_v1/1 Enemy/PNG/walk-5.png" id="32_lwapy"]
 [ext_resource type="Texture2D" uid="uid://dfpojepjq060q" path="res://assets/enemies/HeroandOpponents_v1/1 Enemy/PNG/walk-6.png" id="33_yypbi"]
+[ext_resource type="Texture2D" uid="uid://garplc0iviou" path="res://assets/enemies/HeroandOpponents_v1/1 Enemy/PNG/dead-1.png" id="34_2rmsh"]
+[ext_resource type="Texture2D" uid="uid://bimtb4p41kx3a" path="res://assets/enemies/HeroandOpponents_v1/1 Enemy/PNG/dead-2.png" id="35_1fi22"]
+[ext_resource type="Texture2D" uid="uid://dgiofairslsp6" path="res://assets/enemies/HeroandOpponents_v1/1 Enemy/PNG/dead-3.png" id="36_5bl7l"]
+[ext_resource type="Texture2D" uid="uid://bjio50bgwsccg" path="res://assets/enemies/HeroandOpponents_v1/1 Enemy/PNG/dead-4.png" id="37_tg1vt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0nssj"]
 height = 64.0
@@ -175,11 +179,29 @@ tracks/0/keys = {
 "values": [ExtResource("28_rr7wv"), ExtResource("29_l3k04"), ExtResource("30_a38s5"), ExtResource("31_i0gwl"), ExtResource("32_lwapy"), ExtResource("33_yypbi")]
 }
 
+[sub_resource type="Animation" id="Animation_pnktm"]
+resource_name = "dead"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.298373),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("34_2rmsh"), ExtResource("35_1fi22"), ExtResource("36_5bl7l"), ExtResource("37_tg1vt")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i6q75"]
 _data = {
 &"RESET": SubResource("Animation_xd6ye"),
 &"attackA": SubResource("Animation_njgea"),
 &"attackB": SubResource("Animation_pp5jg"),
+&"dead": SubResource("Animation_pnktm"),
 &"hit": SubResource("Animation_pmt8q"),
 &"idle": SubResource("Animation_q3ie0"),
 &"walk": SubResource("Animation_gyxey")

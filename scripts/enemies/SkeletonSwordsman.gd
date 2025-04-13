@@ -33,6 +33,7 @@ var attack_timer: float = 0.0
 var hit_timer: float = 0.0
 var attack_cooldown: float = 1.0
 var hit_cooldown: float = 0.5
+var death_animation_started = false
 
 # Node references
 @onready var sprite: Sprite2D = $Sprite2D
@@ -257,17 +258,31 @@ func _handle_hit_state(delta):
 			idle_timer = 0.0
 
 func _handle_dead_state(_delta):
-	# Play death animation if we have one
-	if animation_player.has_animation("dead") and not animation_player.is_playing():
+	# Only play death animation once
+	if not death_animation_started:
+		death_animation_started = true
 		animation_player.play("dead")
+		
+		# Connect the animation_finished signal if not already connected
+		if not animation_player.animation_finished.is_connected(_on_death_animation_finished):
+			animation_player.animation_finished.connect(_on_death_animation_finished)
 	
-	# Disable collision and physics
-	set_collision_layer_value(1, false)
-	set_collision_mask_value(1, false)
+	# We want to keep collision with the floor but disable other interactions
+	set_collision_layer_value(2, false)  # Disable enemy layer
+	set_collision_mask_value(2, false)   # Disable interaction with player
 	
-	# Wait for animation to finish then queue_free
-	if not animation_player.is_playing():
-		queue_free()
+	# Freeze horizontal movement
+	velocity.x = 0
+
+func _on_death_animation_finished(anim_name):
+	print("Animation finished: ", anim_name)
+	if anim_name == "dead":
+		print("Death animation completed, starting fade")
+		# Start fading out
+		var tween = create_tween()
+		tween.tween_property(sprite, "modulate:a", 0.0, 1.0)  # Fade out over 1 second
+		# Add a debug print before the queue_free call
+		tween.tween_callback(func(): print("Tween completed, about to queue_free"); queue_free())
 
 func update_facing(direction: float):
 	if direction == 0:
