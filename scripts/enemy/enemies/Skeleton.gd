@@ -12,8 +12,8 @@ func _ready():
 	movement_speed = 70.0
 	
 	# Add to the "enemies" group if it doesn't exist already
-	if not is_in_group("enemies"):
-		add_to_group("enemies")
+	if not is_in_group("enemy"):
+		add_to_group("enemy")
 
 # Override the drop_loot function
 func drop_loot():
