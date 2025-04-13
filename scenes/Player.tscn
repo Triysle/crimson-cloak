@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bryfivf4t1wgy"]
+[gd_scene load_steps=34 format=3 uid="uid://bryfivf4t1wgy"]
 
 [ext_resource type="Script" uid="uid://caki06lsipjvu" path="res://scripts/player/Player.gd" id="1_v6fml"]
 [ext_resource type="Texture2D" uid="uid://cflg4c8he333p" path="res://assets/player/SS_Game_Player_v.1.0/idle/idle.png" id="2_3li8b"]
@@ -594,6 +594,9 @@ _data = {
 &"slide": SubResource("Animation_lkdrv")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_sfy4j"]
+radius = 16.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 texture_filter = 1
 script = ExtResource("1_v6fml")
@@ -652,4 +655,12 @@ script = ExtResource("14_p7iby")
 [node name="Hurt" type="Node" parent="StateMachine"]
 script = ExtResource("20_sfy4j")
 
+[node name="AttackBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(16, -16)
+shape = SubResource("CircleShape2D_sfy4j")
+disabled = true
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="AttackBox" to="." method="_on_attack_box_body_entered"]

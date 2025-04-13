@@ -24,6 +24,8 @@ var can_control = true   # Whether the player can be controlled (disabled during
 @onready var sprite = $Sprite2D
 @onready var animation_player = $AnimationPlayer
 @onready var state_machine = $StateMachine
+@onready var attack_box = $AttackBox
+@onready var attack_box_collision = $AttackBox/CollisionShape2D
 
 # The physics_process is now much simpler as states handle the logic
 func _physics_process(_delta):
@@ -84,3 +86,7 @@ func _on_animation_player_animation_finished(anim_name):
 					state_machine.transition_to("idle")
 				else:
 					state_machine.transition_to("fall")
+
+func _on_attack_box_body_entered(body):
+	if body.is_in_group("enemy") and body.has_method("take_damage"):
+		body.take_damage(20)  # 20 damage per hit

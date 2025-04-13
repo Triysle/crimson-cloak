@@ -24,6 +24,15 @@ func enter():
 	# Play the appropriate attack animation
 	player.animation_player.play("attack" + str(current_attack))
 	
+	# Make sure hitbox is disabled at start
+	player.attack_box_collision.disabled = true
+	# Schedule enabling the hitbox
+	var timer = get_tree().create_timer(0.1)  # Enable hitbox after 0.1s
+	timer.timeout.connect(func(): player.attack_box_collision.disabled = false)
+	# Schedule disabling it
+	timer = get_tree().create_timer(0.3)  # Disable after 0.3s total
+	timer.timeout.connect(func(): player.attack_box_collision.disabled = true)
+	
 	attack_timer = 0.0
 	can_combo = false  # Initially can't combo until animation reaches combo window
 	combo_requested = false
