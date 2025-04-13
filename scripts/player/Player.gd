@@ -41,9 +41,25 @@ func fall_through_platforms():
 	# Force platform detection to update
 	move_and_slide()
 
-func take_damage(amount: int):
+func take_damage(amount: int, attacker_position: Vector2 = Vector2.ZERO):
 	health -= amount
 	print("Player took ", amount, " damage! Health: ", health)
+	
+	# Calculate direction for knockback (from attacker to player)
+	var direction = 1.0
+	if attacker_position != Vector2.ZERO:
+		direction = sign(global_position.x - attacker_position.x)
+		if direction == 0: direction = 1.0
+	
+	# Transition to hurt state with parameters
+	state_machine.transition_to("hurt", {"direction": direction})
+	
+	# Check if player has died
+	if health <= 0:
+		# Handle death (could be another state)
+		print("Player died!")
+		# For now, just respawn or reset
+		health = max_health
 
 func _on_animation_player_animation_finished(anim_name):
 	# Check if it's an attack animation that finished

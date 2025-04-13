@@ -1444,6 +1444,14 @@ position = Vector2(304, 448)
 
 [node name="Skeleton" parent="." instance=ExtResource("9_6e24c")]
 position = Vector2(984, 600)
+max_health = 100
+health = 100
+damage = 10
+detection_range = 200.0
+wander_range = 100.0
+gravity = 980.0
+acceleration = 1000.0
+friction = 800.0
 
 [node name="FrontTiles" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAARABIAAQABABEAAAASABIAAQACABEAAAAAABIAAgABAA0AAAAAABMAAgABAA4AAAABABIAAgACAA0AAAABABMAAgACAA4AAAACABIAAgADAA0AAAACABMAAgADAA4AAAADABIAAgAEAA0AAAADABMAAgAEAA4AAAAEABIAAgAFAA0AAAAEABMAAgAFAA4AAAAFABIAAgAGAA0AAAAFABMAAgAGAA4AAAA=")
