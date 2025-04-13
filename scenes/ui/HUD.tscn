@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://q8f84bu3ojuy"]
+[gd_scene load_steps=6 format=3 uid="uid://q8f84bu3ojuy"]
 
 [ext_resource type="Script" uid="uid://rc1pkqhhnl55" path="res://scenes/ui/HUD.gd" id="1_atyv1"]
-[ext_resource type="Texture2D" uid="uid://c5co5gu01jxtq" path="res://assets/ui/ancient-coin-icon(1).svg" id="2_6ll6g"]
+[ext_resource type="Texture2D" uid="uid://c5co5gu01jxtq" path="res://assets/ui/currency/ancient-coin-icon(1).svg" id="2_6ll6g"]
+[ext_resource type="Texture2D" uid="uid://dsw04pgjo4b7p" path="res://assets/ui/health icons/crystal-full-black-border.svg" id="2_ig75s"]
+[ext_resource type="Texture2D" uid="uid://cy54vybrqd6gh" path="res://assets/ui/health icons/crystal-empty-purple(3).svg" id="3_ig75s"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ig75s"]
 
@@ -30,22 +32,56 @@ size_flags_horizontal = 3
 [node name="HealthBar" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_constants/separation = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
-custom_minimum_size = Vector2(20, 30)
+[node name="HealthContainer1" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
+custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
-color = Color(0.8, 0, 0, 1)
+texture = ExtResource("2_ig75s")
 
-[node name="ColorRect2" type="ColorRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
-custom_minimum_size = Vector2(20, 30)
+[node name="HealthContainer2" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
+custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
-color = Color(0.8, 0, 0, 1)
+texture = ExtResource("2_ig75s")
 
-[node name="ColorRect3" type="ColorRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
-custom_minimum_size = Vector2(20, 30)
+[node name="HealthContainer3" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
+custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
-color = Color(0.8, 0, 0, 1)
+texture = ExtResource("2_ig75s")
+
+[node name="HealthContainer4" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
+custom_minimum_size = Vector2(32, 48)
+layout_mode = 2
+texture = ExtResource("2_ig75s")
+
+[node name="HealthContainer5" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
+custom_minimum_size = Vector2(32, 48)
+layout_mode = 2
+texture = ExtResource("2_ig75s")
+
+[node name="HealthContainer6" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
+custom_minimum_size = Vector2(32, 48)
+layout_mode = 2
+texture = ExtResource("2_ig75s")
+
+[node name="HealthContainer7" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
+custom_minimum_size = Vector2(32, 48)
+layout_mode = 2
+texture = ExtResource("2_ig75s")
+
+[node name="HealthContainer8" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
+custom_minimum_size = Vector2(32, 48)
+layout_mode = 2
+texture = ExtResource("2_ig75s")
+
+[node name="HealthContainer9" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
+custom_minimum_size = Vector2(32, 48)
+layout_mode = 2
+texture = ExtResource("3_ig75s")
+
+[node name="HealthContainer10" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
+custom_minimum_size = Vector2(32, 48)
+layout_mode = 2
+texture = ExtResource("3_ig75s")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
