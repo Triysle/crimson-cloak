@@ -2,6 +2,7 @@ extends State
 
 func enter():
 	player.animation_player.play("jump")  # Reuse the jump animation for now
+	player.spawn_dust_effect("jump")
 	player.velocity.y = player.jump_velocity * 0.8  # Slightly weaker than first jump
 
 func physics_update(delta):

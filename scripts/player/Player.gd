@@ -28,6 +28,9 @@ var debug_timer = 0.0
 @onready var animation_player = $AnimationPlayer
 @onready var state_machine = $StateMachine
 
+# Preload the dust effect scene
+const DustEffect = preload("res://scenes/DustEffect.tscn")
+
 func _ready():
 	# Debug prints
 	print("Player _ready called")
@@ -148,3 +151,14 @@ func _on_attack_box_body_entered(body):
 			print("Enemy doesn't have take_damage method")
 	else:
 		print("No hit processed. Is enemy: ", body.is_in_group("enemy"), " Is attacking: ", state_machine.current_state.name.to_lower() == "attack")
+
+# Function to spawn dust effect
+func spawn_dust_effect(animation_name: String):
+	# Create instance of dust effect
+	var dust = DustEffect.instantiate()
+	# Set position to player's feet
+	dust.global_position = global_position + Vector2(0, -20)
+	# Play the specified animation
+	dust.play(animation_name)
+	# Add to the current scene
+	get_tree().current_scene.add_child(dust)
