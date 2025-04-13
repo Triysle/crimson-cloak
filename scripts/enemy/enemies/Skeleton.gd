@@ -15,15 +15,6 @@ func _ready():
 	if not is_in_group("enemies"):
 		add_to_group("enemies")
 
-func take_damage(amount: int):
-	health -= amount
-	
-	if health <= 0:
-		die()
-	else:
-		# Transition to hit state instead of just playing the animation
-		state_machine.transition_to("hit")
-
 # Override the drop_loot function
 func drop_loot():
 	# Here we'd spawn some coins or other loot

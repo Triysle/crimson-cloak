@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bqineexqltu6i"]
+[gd_scene load_steps=49 format=3 uid="uid://bqineexqltu6i"]
 
 [ext_resource type="PackedScene" uid="uid://b7fl6xuo5dxld" path="res://scenes/enemies/Enemy.tscn" id="1_re5l2"]
 [ext_resource type="Texture2D" uid="uid://dmug5l8481i26" path="res://assets/enemies/HeroandOpponents_v1/1 Enemy/PNG/idle-1.png" id="2_uxxut"]
@@ -37,7 +37,6 @@
 [ext_resource type="Script" uid="uid://btn6kpwaj15u1" path="res://scripts/enemy/states/EnemyChaseState.gd" id="35_sx34s"]
 [ext_resource type="Script" uid="uid://dwf48drpl3abq" path="res://scripts/enemy/states/EnemyWanderState.gd" id="36_q2rxa"]
 [ext_resource type="Script" uid="uid://dcm7or5v547d7" path="res://scripts/enemy/states/EnemyAttackState.gd" id="37_ugcfw"]
-[ext_resource type="Script" uid="uid://bko2nsu27hd5b" path="res://scripts/enemy/states/EnemyHitState.gd" id="38_sx34s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l8rnf"]
 height = 64.0
@@ -240,8 +239,5 @@ script = ExtResource("36_q2rxa")
 
 [node name="Attack" type="Node" parent="StateMachine" index="3"]
 script = ExtResource("37_ugcfw")
-
-[node name="Hit" type="Node" parent="StateMachine" index="4"]
-script = ExtResource("38_sx34s")
 
 [connection signal="body_entered" from="AttackBox" to="." method="_on_attack_box_body_entered"]
