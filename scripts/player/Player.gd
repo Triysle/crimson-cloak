@@ -91,12 +91,18 @@ func _on_animation_player_animation_finished(anim_name):
 					state_machine.transition_to("fall")
 
 func _on_attack_box_body_entered(body):
+	print("Attack box hit: ", body.name)
+	print("Is in group enemy: ", body.is_in_group("enemy"))
+	print("Current state: ", state_machine.current_state.name)
+	
 	if body.is_in_group("enemy") and state_machine.current_state.name.to_lower() == "attack":
+		print("Enemy hit confirmed!")
 		# Get the current attack state
 		var attack_state = state_machine.states["attack"]
 		
 		# Make sure we don't hit the same enemy multiple times in one attack
 		if attack_state.hit_enemies.has(body):
+			print("Enemy already hit this attack")
 			return
 			
 		attack_state.hit_enemies.append(body)
@@ -108,6 +114,12 @@ func _on_attack_box_body_entered(body):
 		elif attack_state.current_attack == 3:
 			damage = 20
 			
+		print("Dealing damage: ", damage)
+			
 		# Call the enemy's take_damage method
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
+		else:
+			print("Enemy doesn't have take_damage method")
+	else:
+		print("No hit processed. Is enemy: ", body.is_in_group("enemy"), " Is attacking: ", state_machine.current_state.name.to_lower() == "attack")
