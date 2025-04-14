@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy54vybrqd6gh"
-path="res://.godot/imported/crystal-empty-purple(3).svg-5830239ad22bf67b026f43bfbc1dc45d.ctex"
+uid="uid://dweyav0e5ku4r"
+path="res://.godot/imported/HealthSegmentFull.png-366c2e9bf9844daa13550416f687c0f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/health icons/crystal-empty-purple(3).svg"
-dest_files=["res://.godot/imported/crystal-empty-purple(3).svg-5830239ad22bf67b026f43bfbc1dc45d.ctex"]
+source_file="res://assets/ui/health icons/HealthSegmentFull.png"
+dest_files=["res://.godot/imported/HealthSegmentFull.png-366c2e9bf9844daa13550416f687c0f5.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

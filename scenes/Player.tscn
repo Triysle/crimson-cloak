@@ -1,9 +1,10 @@
-[gd_scene load_steps=35 format=3 uid="uid://bryfivf4t1wgy"]
+[gd_scene load_steps=37 format=3 uid="uid://bryfivf4t1wgy"]
 
 [ext_resource type="Script" uid="uid://caki06lsipjvu" path="res://scripts/player/Player.gd" id="1_v6fml"]
 [ext_resource type="Texture2D" uid="uid://cflg4c8he333p" path="res://assets/player/SS_Game_Player_v.1.0/idle/idle.png" id="2_3li8b"]
 [ext_resource type="Script" uid="uid://duj0scoibrs1c" path="res://scripts/player/ShadowTrail.gd" id="2_61ith"]
 [ext_resource type="Texture2D" uid="uid://bw42grq88qh2q" path="res://assets/player/SS_Game_Player_v.1.0/run/run.png" id="2_mdl7e"]
+[ext_resource type="Shader" uid="uid://diha6a5x3fple" path="res://scenes/Player.gdshader" id="3_b8lor"]
 [ext_resource type="Texture2D" uid="uid://lu1jx1b2mnva" path="res://assets/player/SS_Game_Player_v.1.0/jump/jump.png" id="4_qu4a1"]
 [ext_resource type="Texture2D" uid="uid://b40b1symjq0uw" path="res://assets/player/SS_Game_Player_v.1.0/jump/jump_fall.png" id="5_70d11"]
 [ext_resource type="Script" uid="uid://nn3oeimt1pme" path="res://scripts/player/StateMachine.gd" id="6_6eyey"]
@@ -25,6 +26,12 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8vuu"]
 radius = 8.0
 height = 32.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b8lor"]
+shader = ExtResource("3_b8lor")
+shader_parameter/original_color = Color(0.337255, 0.0431373, 0.156863, 1)
+shader_parameter/replacement_color = Color(0.397482, 5.53504e-07, 1.68458e-07, 1)
+shader_parameter/tolerance = 0.1
 
 [sub_resource type="Animation" id="Animation_g2els"]
 length = 0.001
@@ -610,6 +617,7 @@ position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_u8vuu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_b8lor")
 position = Vector2(0, -20)
 texture = ExtResource("2_mdl7e")
 hframes = 8
