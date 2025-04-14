@@ -1,32 +1,31 @@
 extends CanvasLayer
 
-@onready var health_bar = $MarginContainer/HBoxContainer/VBoxContainer/HealthBar
-@onready var coin_count = $MarginContainer/HBoxContainer/VBoxContainer3/CurrencyDisplay/CoinCount
-@onready var ability_icon = $MarginContainer/HBoxContainer/VBoxContainer2/AbilityIcon
+@onready var health_bar = $Background/HealthBar
+@onready var coin_count = $Background/CoinDisplay/CoinCounter
+@onready var ability_icon = $Background/Panel/AbilityIcon
 
-# References to individual health segments
-var health_segments = []
+# References to health container icons (if you've added them)
+var health_containers = []
 
 func _ready():
-	# Get references to all health segments
-	for child in health_bar.get_children():
-		if child.name.begins_with("HealthSegment"):
-			health_segments.append(child)
+	# Get references to health container icons if they exist
+	for container in $MarginContainer/HBoxContainer/VBoxContainer/HealthContainers.get_children():
+		health_containers.append(container)
 
 func update_health(current_health, max_health):
-	# Hide all segments first
-	for segment in health_segments:
-		segment.visible = false
+	# Update the health bar value
+	health_bar.max_value = max_health
+	health_bar.value = current_health
 	
-	# Show the correct number of segments based on max_health
-	for i in range(min(max_health, health_segments.size())):
-		health_segments[i].visible = true
-		
-		# Color the segment based on current health
-		if i < current_health:
-			health_segments[i].color = Color(0.8, 0, 0)  # Red for filled health
-		else:
-			health_segments[i].color = Color(0.3, 0.3, 0.3)  # Gray for empty health
+	# Update health containers if implemented
+	if health_containers.size() > 0:
+		for i in range(health_containers.size()):
+			if i < 5:  # Assuming a maximum of 5 health containers
+				health_containers[i].visible = true
+				# Show filled or empty based on player's permanent health status
+				# This part depends on how you're tracking permanent health
+			else:
+				health_containers[i].visible = false
 
 func update_currency(amount):
 	coin_count.text = str(amount)
