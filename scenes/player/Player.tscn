@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bryfivf4t1wgy"]
+[gd_scene load_steps=38 format=3 uid="uid://bryfivf4t1wgy"]
 
 [ext_resource type="Script" uid="uid://caki06lsipjvu" path="res://scripts/player/Player.gd" id="1_v6fml"]
 [ext_resource type="Texture2D" uid="uid://cflg4c8he333p" path="res://assets/player/SS_Game_Player_v.1.0/idle/idle.png" id="2_3li8b"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://bb6r4eckkd7d1" path="res://scripts/player/states/AttackState.gd" id="14_p7iby"]
 [ext_resource type="Script" uid="uid://c6esbiooc63m2" path="res://scripts/player/states/HurtState.gd" id="20_sfy4j"]
 [ext_resource type="PackedScene" uid="uid://q8f84bu3ojuy" path="res://scenes/ui/HUD.tscn" id="21_gv3ic"]
+[ext_resource type="Script" uid="uid://p7biordpjj8u" path="res://scripts/player/states/SpawnState.gd" id="22_ro0t8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8vuu"]
 radius = 8.0
@@ -672,6 +673,9 @@ script = ExtResource("14_p7iby")
 
 [node name="Hurt" type="Node" parent="StateMachine"]
 script = ExtResource("20_sfy4j")
+
+[node name="Spawn" type="Node" parent="StateMachine"]
+script = ExtResource("22_ro0t8")
 
 [node name="HUD" parent="." instance=ExtResource("21_gv3ic")]
 

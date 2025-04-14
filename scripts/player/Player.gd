@@ -111,16 +111,13 @@ func take_damage(amount: int, attacker_position: Vector2 = Vector2.ZERO):
 		# If no attacker position provided, use opposite of player facing
 		hit_direction = 1.0 if sprite.flip_h else -1.0
 	
-	# Transition to hurt state
-	state_machine.transition_to("hurt")
-	
 	# Check if player has died
 	if health <= 0:
-		health = 0
-		print("Player died!")
-		# You can handle death here (could transition to a death state)
-		# For now, just reset health
-		health = max_health
+		die()
+		return
+	
+	# If not dead, transition to hurt state
+	state_machine.transition_to("hurt")
 
 func _on_animation_player_animation_finished(anim_name):
 	# Check if it's an attack animation that finished
@@ -227,6 +224,10 @@ func _input(event):
 	# Check for healing input
 	if event.is_action_pressed("heal"):
 		use_healing()
+		
+	# Debug suicide button
+	if event.is_action_pressed("debug_die"):
+		die()
 
 func heal_to_full():
 	# Restore health to maximum
@@ -236,3 +237,36 @@ func heal_to_full():
 	# Update the HUD
 	if hud:
 		hud.update_health(health, max_health)
+
+func respawn_at(respawn_position: Vector2):
+	# Reset player state
+	health = max_health
+	velocity = Vector2.ZERO
+	can_control = false
+	
+	# Set player position to respawn point
+	global_position = respawn_position
+	
+	# Update the HUD
+	if hud:
+		hud.update_health(health, max_health)
+	
+	# Transition to spawn state
+	state_machine.transition_to("spawn")
+
+func die():
+	# Disable player control
+	can_control = false
+	
+	# Player death logic here (like playing death animation if you have one)
+	health = 0
+	
+	# Update HUD
+	if hud:
+		hud.update_health(health, max_health)
+	
+	# Call respawn after a short delay
+	await get_tree().create_timer(1.0).timeout
+	
+	# Use GameManager to respawn
+	GameManager.respawn_player()

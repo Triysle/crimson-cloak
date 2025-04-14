@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0r0y"]
 size = Vector2(64, 16)
 
-[node name="Shrine" type="Area2D"]
+[node name="Shrine" type="Area2D" groups=["shrine"]]
 texture_filter = 1
 script = ExtResource("1_i0b47")
 

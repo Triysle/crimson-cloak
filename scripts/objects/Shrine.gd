@@ -7,7 +7,9 @@ signal shrine_activated
 @export var dormant_pulse_period: float = 2.0              # Time for one complete pulse cycle when dormant
 @export var healing_amount: int = 100                      # Amount to heal
 @export var restore_charges: bool = true                   # Whether to restore healing charges
+@export var is_spawn_point: bool = false  # Whether this shrine should be used as a spawn point
 
+var is_active_spawn: bool = false        # Whether this shrine is the current active spawn
 var player_in_range: bool = false
 var pulse_time: float = 0.0
 var original_material: ShaderMaterial
@@ -15,6 +17,8 @@ var shrine_state: String = "dormant"  # Can be "dormant", "activating", "active"
 var activation_timer: float = 0.0
 
 func _ready():
+	# Add to shrine group
+	add_to_group("shrine")
 	# Create shader material for the sprite
 	var sprite = $Sprite2D
 	
@@ -89,6 +93,9 @@ func activate_shrine():
 		shrine_state = "activating"
 		activation_timer = 0.0
 		
+		# Set as spawn point
+		set_as_spawn_point()
+		
 		# Emit signal for saving game
 		shrine_activated.emit()
 		
@@ -103,3 +110,16 @@ func activate_shrine():
 			# Restore healing charges
 			if restore_charges and player.has_method("add_healing_charge"):
 				player.add_healing_charge(player.max_healing_charges)
+
+func set_as_spawn_point():
+	is_active_spawn = true
+	
+	# Find all other shrines and deactivate them as spawn points
+	var other_shrines = get_tree().get_nodes_in_group("shrine")
+	for shrine in other_shrines:
+		if shrine != self and shrine.has_method("clear_spawn_point"):
+			shrine.clear_spawn_point()
+
+# Add this method to clear the spawn status
+func clear_spawn_point():
+	is_active_spawn = false

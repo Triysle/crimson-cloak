@@ -41,7 +41,8 @@ func _input(event):
 
 # Function to change state
 func transition_to(state_name: String):
-	if state_name == current_state.name.to_lower():
+	# Check if current_state exists and the name matches
+	if current_state and state_name == current_state.name.to_lower():
 		return
 		
 	if states.has(state_name):
