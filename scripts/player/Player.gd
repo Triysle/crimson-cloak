@@ -9,6 +9,9 @@ extends CharacterBody2D
 #Player stats
 @export var max_health: int = 100
 @export var health: int = 100
+@export var max_healing_charges: int = 5
+@export var healing_charges: int = 1
+@export var healing_amount: int = 25
 
 # Get the gravity from the project settings to be synced with RigidBody nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -63,16 +66,11 @@ func _ready():
 	if hud:
 		hud.update_health(health, max_health)
 		hud.update_currency(currency)
+		hud.update_healing_charges(healing_charges, max_healing_charges)
 
 # Debug function to help see what's happening
-func _process(delta):
-	# Basic debug info every second
-	debug_timer += delta
-	if debug_timer >= 1.0:
-		debug_timer = 0.0
-		var attack_box = $AttackBox
-		if attack_box and attack_box.has_node("CollisionShape2D"):
-			print("AttackBox CollisionShape2D disabled: ", attack_box.get_node("CollisionShape2D").disabled)
+func _process(_delta):
+	pass
 
 # The physics_process is now much simpler as states handle the logic
 func _physics_process(_delta):
@@ -195,3 +193,37 @@ func set_ability(ability_texture):
 	# Update the HUD
 	if hud:
 		hud.set_ability_icon(ability_texture)
+
+func use_healing():
+	if healing_charges > 0 and health < max_health:
+		healing_charges -= 1
+		health += healing_amount
+		
+		# Cap health at maximum
+		if health > max_health:
+			health = max_health
+			
+		# Update the HUD
+		if hud:
+			hud.update_health(health, max_health)
+			hud.update_healing_charges(healing_charges, max_healing_charges)
+		
+		return true  # Successfully used healing
+	
+	return false  # Could not use healing
+
+func add_healing_charge(amount: int = 1):
+	healing_charges += amount
+	
+	# Cap at maximum
+	if healing_charges > max_healing_charges:
+		healing_charges = max_healing_charges
+		
+	# Update the HUD
+	if hud:
+		hud.update_healing_charges(healing_charges, max_healing_charges)
+
+func _input(event):
+	# Check for healing input
+	if event.is_action_pressed("heal"):
+		use_healing()

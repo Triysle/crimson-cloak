@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvv3lxbic7eu1"
-path="res://.godot/imported/HealthSegmentEmpty.png-420cd8763a617ab1058e9f75343cbbcb.ctex"
+uid="uid://dweyav0e5ku4r"
+path="res://.godot/imported/HealthSegmentFull.png-958c9df6717d463639173b70a448af50.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/health icons/HealthSegmentEmpty.png"
-dest_files=["res://.godot/imported/HealthSegmentEmpty.png-420cd8763a617ab1058e9f75343cbbcb.ctex"]
+source_file="res://assets/ui/health/HealthSegmentFull.png"
+dest_files=["res://.godot/imported/HealthSegmentFull.png-958c9df6717d463639173b70a448af50.ctex"]
 
 [params]
 

@@ -3,32 +3,40 @@ extends CanvasLayer
 @onready var health_bar = $Background/HealthBar
 @onready var coin_count = $Background/CoinDisplay/CoinCounter
 @onready var ability_icon = $Background/Panel/AbilityIcon
+@onready var health_containers = $Background/HealthContainers
 
-# References to health container icons (if you've added them)
-var health_containers = []
+# Track how many healing charges the player has
+var max_healing_charges = 5
+var current_healing_charges = 1
 
 func _ready():
-	# Get references to health container icons if they exist
-	for container in $MarginContainer/HBoxContainer/VBoxContainer/HealthContainers.get_children():
-		health_containers.append(container)
+	# Initialize the HUD
+	pass
 
 func update_health(current_health, max_health):
 	# Update the health bar value
 	health_bar.max_value = max_health
 	health_bar.value = current_health
-	
-	# Update health containers if implemented
-	if health_containers.size() > 0:
-		for i in range(health_containers.size()):
-			if i < 5:  # Assuming a maximum of 5 health containers
-				health_containers[i].visible = true
-				# Show filled or empty based on player's permanent health status
-				# This part depends on how you're tracking permanent health
-			else:
-				health_containers[i].visible = false
 
 func update_currency(amount):
 	coin_count.text = str(amount)
 
 func set_ability_icon(texture):
 	ability_icon.texture = texture
+
+func update_healing_charges(current, maximum):
+	current_healing_charges = current
+	max_healing_charges = maximum
+	
+	# Update the visual representation of healing charges
+	for i in range(health_containers.get_child_count()):
+		var container = health_containers.get_child(i)
+		
+		# Show/hide based on max charges
+		container.visible = i < max_healing_charges
+		
+		# Set the appropriate texture based on current charges
+		if i < current_healing_charges:
+			container.texture = preload("res://assets/ui/health/HealthSegmentFull.png")
+		else:
+			container.texture = preload("res://assets/ui/health/HealthSegmentEmpty.png")

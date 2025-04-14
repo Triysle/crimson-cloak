@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://q8f84bu3ojuy"]
+[gd_scene load_steps=10 format=3 uid="uid://q8f84bu3ojuy"]
 
 [ext_resource type="Script" uid="uid://rc1pkqhhnl55" path="res://scenes/ui/HUD.gd" id="1_atyv1"]
+[ext_resource type="Texture2D" uid="uid://dkgr37by83b4g" path="res://assets/ui/health/health-bar-ticks.svg" id="2_4ed8p"]
 [ext_resource type="Texture2D" uid="uid://c5co5gu01jxtq" path="res://assets/ui/currency/ancient-coin-icon(1).svg" id="2_6ll6g"]
-[ext_resource type="Texture2D" uid="uid://dweyav0e5ku4r" path="res://assets/ui/health icons/HealthSegmentFull.png" id="2_ig75s"]
-[ext_resource type="Texture2D" uid="uid://cvv3lxbic7eu1" path="res://assets/ui/health icons/HealthSegmentEmpty.png" id="3_ig75s"]
+[ext_resource type="Texture2D" uid="uid://dweyav0e5ku4r" path="res://assets/ui/health/HealthSegmentFull.png" id="2_ig75s"]
+[ext_resource type="Texture2D" uid="uid://cvv3lxbic7eu1" path="res://assets/ui/health/HealthSegmentEmpty.png" id="3_ig75s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ig75s"]
 bg_color = Color(0.133333, 0.133333, 0.133333, 1)
@@ -33,6 +34,15 @@ corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnyu1"]
 bg_color = Color(0.8, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="HUD" type="CanvasLayer" groups=["hud"]]
 script = ExtResource("1_atyv1")
@@ -74,7 +84,16 @@ offset_right = 282.0
 offset_bottom = 26.0
 theme_override_styles/background = SubResource("StyleBoxFlat_4ed8p")
 theme_override_styles/fill = SubResource("StyleBoxFlat_rnyu1")
+value = 55.0
 show_percentage = false
+
+[node name="HealthTicks" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 9.0
+offset_right = 282.0
+offset_bottom = 25.0
+texture = ExtResource("2_4ed8p")
 
 [node name="HealthContainers" type="HBoxContainer" parent="Background"]
 layout_mode = 0
@@ -84,25 +103,31 @@ offset_right = 172.0
 offset_bottom = 46.0
 
 [node name="HealthContainer1" type="TextureRect" parent="Background/HealthContainers"]
-custom_minimum_size = Vector2(20, 18)
+custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 texture = ExtResource("2_ig75s")
 expand_mode = 1
 
 [node name="HealthContainer2" type="TextureRect" parent="Background/HealthContainers"]
-custom_minimum_size = Vector2(20, 18)
+custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 texture = ExtResource("2_ig75s")
 expand_mode = 1
 
 [node name="HealthContainer3" type="TextureRect" parent="Background/HealthContainers"]
-custom_minimum_size = Vector2(20, 18)
+custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 texture = ExtResource("2_ig75s")
 expand_mode = 1
 
 [node name="HealthContainer4" type="TextureRect" parent="Background/HealthContainers"]
-custom_minimum_size = Vector2(20, 18)
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+texture = ExtResource("3_ig75s")
+expand_mode = 1
+
+[node name="HealthContainer5" type="TextureRect" parent="Background/HealthContainers"]
+custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 texture = ExtResource("3_ig75s")
 expand_mode = 1
@@ -110,9 +135,9 @@ expand_mode = 1
 [node name="CoinDisplay" type="HBoxContainer" parent="Background"]
 layout_mode = 0
 offset_left = 200.0
-offset_top = 24.0
+offset_top = 26.0
 offset_right = 280.0
-offset_bottom = 50.0
+offset_bottom = 52.0
 alignment = 2
 
 [node name="CoinCounter" type="Label" parent="Background/CoinDisplay"]
