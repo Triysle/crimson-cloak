@@ -13,8 +13,14 @@ func enter():
 	# Move player up by spawn_height
 	player.global_position.y -= spawn_height
 	
-	# Set player as invisible initially
-	player.modulate = Color(1, 1, 1, 0)  # Set RGBA, with alpha=0 for invisible
+	# Set player as invisible initially through the shader
+	if player.sprite.material is ShaderMaterial:
+		print("Using shader material for fade")
+		player.sprite.material.set_shader_parameter("alpha_override", 0.0)
+	else:
+		# Fallback to modulate if no shader
+		print("Using modulate for fade (fallback)")
+		player.modulate = Color(1, 1, 1, 0)
 	
 	# Disable player control
 	player.can_control = false
@@ -32,7 +38,11 @@ func physics_update(delta):
 	if timer <= fade_duration:
 		# Gradually increase alpha value
 		var alpha = timer / fade_duration
-		player.modulate = Color(1, 1, 1, alpha)  # Create a new Color with updated alpha
+		
+		if player.sprite.material is ShaderMaterial:
+			player.sprite.material.set_shader_parameter("alpha_override", alpha)
+		else:
+			player.modulate = Color(1, 1, 1, alpha)
 	
 	# After spawn_duration, transition to fall state
 	if timer >= spawn_duration:
@@ -40,7 +50,10 @@ func physics_update(delta):
 		player.can_control = true
 		
 		# Make sure player is fully visible
-		player.modulate = Color(1, 1, 1, 1)
+		if player.sprite.material is ShaderMaterial:
+			player.sprite.material.set_shader_parameter("alpha_override", 1.0)
+		else:
+			player.modulate = Color(1, 1, 1, 1)
 		
 		# Transition to fall state to start normal gameplay
 		state_machine.transition_to("fall")

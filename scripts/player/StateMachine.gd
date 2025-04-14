@@ -49,10 +49,6 @@ func transition_to(state_name: String):
 	if current_state and state_name == current_state.name.to_lower():
 		return
 	
-	# Debug the state transition
-	print("Trying to transition to state:", state_name)
-	print("Available states:", states.keys())
-	
 	if states.has(state_name):
 		if current_state:
 			current_state.exit()

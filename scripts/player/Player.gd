@@ -258,6 +258,8 @@ func die():
 	# Disable player control
 	can_control = false
 	
+	animation_player.play("die")
+	
 	# Player death logic here (like playing death animation if you have one)
 	health = 0
 	
