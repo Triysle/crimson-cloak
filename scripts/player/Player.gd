@@ -22,7 +22,7 @@ var original_radius: float = 0.0  # slide state vars
 var original_height: float = 0.0  # slide state vars
 var original_position: Vector2 = Vector2.ZERO  # slide state vars
 var hit_direction = 1.0  # Direction the player was hit from (positive = right, negative = left)
-var can_control = true   # Whether the player can be controlled (disabled during hurt state)
+var can_control = true   # Whether the player dcan be controlled (disabled during hurt state)
 
 # Debug variables
 var debug_timer = 0.0

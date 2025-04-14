@@ -27,6 +27,8 @@ func _ready():
 		current_state = states["idle"]
 		current_state.enter()
 
+	print("Available states: ", states.keys())
+	
 func _process(delta):
 	if current_state:
 		current_state.update(delta)
@@ -41,15 +43,22 @@ func _input(event):
 
 # Function to change state
 func transition_to(state_name: String):
+	state_name = state_name.to_lower()
+	
 	# Check if current_state exists and the name matches
 	if current_state and state_name == current_state.name.to_lower():
 		return
-		
+	
+	# Debug the state transition
+	print("Trying to transition to state:", state_name)
+	print("Available states:", states.keys())
+	
 	if states.has(state_name):
 		if current_state:
 			current_state.exit()
 		
 		current_state = states[state_name]
+		print("Successfully transitioned to state:", current_state.name)
 		current_state.enter()
 	else:
-		print("State ", state_name, " not found in state machine")
+		print("State '", state_name, "' not found in state machine. Available states:", states.keys())

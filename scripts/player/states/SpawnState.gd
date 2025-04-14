@@ -14,7 +14,7 @@ func enter():
 	player.global_position.y -= spawn_height
 	
 	# Set player as invisible initially
-	player.modulate.a = 0.0
+	player.modulate = Color(1, 1, 1, 0)  # Set RGBA, with alpha=0 for invisible
 	
 	# Disable player control
 	player.can_control = false
@@ -31,12 +31,16 @@ func physics_update(delta):
 	# Handle fading in
 	if timer <= fade_duration:
 		# Gradually increase alpha value
-		player.modulate.a = timer / fade_duration
+		var alpha = timer / fade_duration
+		player.modulate = Color(1, 1, 1, alpha)  # Create a new Color with updated alpha
 	
 	# After spawn_duration, transition to fall state
 	if timer >= spawn_duration:
 		# Re-enable player control
 		player.can_control = true
+		
+		# Make sure player is fully visible
+		player.modulate = Color(1, 1, 1, 1)
 		
 		# Transition to fall state to start normal gameplay
 		state_machine.transition_to("fall")

@@ -7,6 +7,7 @@ var player: CharacterBody2D = null
 func _ready():
 	# Wait for level to be fully loaded
 	await get_tree().process_frame
+	await get_tree().process_frame
 	
 	# Find player
 	player = get_tree().get_first_node_in_group("player")
@@ -14,8 +15,8 @@ func _ready():
 	# Find all shrines
 	connect_shrines()
 	
-	# Spawn player at initial shrine
-	spawn_player_at_initial_shrine()
+	# Spawn player at initial shrine - with a slight delay
+	call_deferred("spawn_player_at_initial_shrine")
 
 func connect_shrines():
 	var shrines = get_tree().get_nodes_in_group("shrine")
@@ -40,8 +41,10 @@ func spawn_player_at_initial_shrine():
 		
 		# Spawn player at shrine
 		if player:
-			player.global_position = initial_shrine.global_position
+			# Don't set position directly, just call respawn_at
 			player.respawn_at(initial_shrine.global_position)
+	else:
+		print("No shrines found in the level!")
 
 func on_shrine_activated(shrine):
 	# Update current shrine
