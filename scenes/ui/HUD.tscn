@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://q8f84bu3ojuy"]
+[gd_scene load_steps=11 format=3 uid="uid://q8f84bu3ojuy"]
 
 [ext_resource type="Script" uid="uid://rc1pkqhhnl55" path="res://scripts/player/HUD.gd" id="1_atyv1"]
 [ext_resource type="Texture2D" uid="uid://dkgr37by83b4g" path="res://assets/ui/health/health-bar-ticks.svg" id="2_4ed8p"]
 [ext_resource type="Texture2D" uid="uid://c5co5gu01jxtq" path="res://assets/ui/currency/ancient-coin-icon(1).svg" id="2_6ll6g"]
 [ext_resource type="Texture2D" uid="uid://dweyav0e5ku4r" path="res://assets/ui/health/HealthSegmentFull.png" id="2_ig75s"]
+[ext_resource type="Texture2D" uid="uid://gdghm6kewgoe" path="res://assets/ui/hud-background.svg" id="2_rnyu1"]
 [ext_resource type="Texture2D" uid="uid://cvv3lxbic7eu1" path="res://assets/ui/health/HealthSegmentEmpty.png" id="3_ig75s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ig75s"]
@@ -52,6 +53,11 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 310.0
 offset_bottom = 80.0
+texture = ExtResource("2_rnyu1")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 
 [node name="Panel" type="Panel" parent="Background"]
 layout_mode = 0

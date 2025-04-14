@@ -1,14 +1,15 @@
-[gd_scene load_steps=20 format=4 uid="uid://q38lunwb3chr"]
+[gd_scene load_steps=21 format=4 uid="uid://q38lunwb3chr"]
 
-[ext_resource type="Texture2D" uid="uid://boycs7bxs2vi7" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background1.png" id="1_5n3yh"]
-[ext_resource type="PackedScene" uid="uid://bryfivf4t1wgy" path="res://scenes/Player.tscn" id="1_dojpo"]
-[ext_resource type="Texture2D" uid="uid://cn68fhsa85ebr" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background2.png" id="2_0n17k"]
-[ext_resource type="Texture2D" uid="uid://rm71dyy30oid" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background3.png" id="3_g3y3g"]
-[ext_resource type="Texture2D" uid="uid://bbt85ea4do73k" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background4.png" id="4_6e24c"]
-[ext_resource type="Texture2D" uid="uid://cnbblpyf8p8s5" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background5.png" id="5_5ycvo"]
-[ext_resource type="Texture2D" uid="uid://dkqo6h04od3wt" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/MainLevBuild.png" id="6_0n17k"]
-[ext_resource type="Texture2D" uid="uid://cikgynx6ooius" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Decoratives.png" id="7_g3y3g"]
-[ext_resource type="PackedScene" uid="uid://soit815ldxsc" path="res://scenes/enemies/SkeletonSwordsman.tscn" id="9_6e24c"]
+[ext_resource type="Texture2D" uid="uid://boycs7bxs2vi7" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background1.png" id="1_ktef7"]
+[ext_resource type="Texture2D" uid="uid://cn68fhsa85ebr" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background2.png" id="2_l1je0"]
+[ext_resource type="Texture2D" uid="uid://rm71dyy30oid" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background3.png" id="3_ae2j3"]
+[ext_resource type="Texture2D" uid="uid://bbt85ea4do73k" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background4.png" id="4_mg55r"]
+[ext_resource type="Texture2D" uid="uid://cnbblpyf8p8s5" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background5.png" id="5_21oen"]
+[ext_resource type="Texture2D" uid="uid://dkqo6h04od3wt" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/MainLevBuild.png" id="6_o0skh"]
+[ext_resource type="Texture2D" uid="uid://cikgynx6ooius" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Decoratives.png" id="7_e5e55"]
+[ext_resource type="PackedScene" uid="uid://poxg7ogoihuv" path="res://scenes/objects/Shrine.tscn" id="8_l1je0"]
+[ext_resource type="PackedScene" uid="uid://bryfivf4t1wgy" path="res://scenes/player/Player.tscn" id="8_seeu7"]
+[ext_resource type="PackedScene" uid="uid://soit815ldxsc" path="res://scenes/enemies/SkeletonSwordsman.tscn" id="9_hlooo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1fpmp"]
 size = Vector2(16, 872)
@@ -32,7 +33,7 @@ size = Vector2(192, 8)
 size = Vector2(128, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g3y3g"]
-texture = ExtResource("6_0n17k")
+texture = ExtResource("6_o0skh")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -1217,7 +1218,7 @@ texture_region_size = Vector2i(32, 32)
 34:35/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6e24c"]
-texture = ExtResource("7_g3y3g")
+texture = ExtResource("7_e5e55")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -1346,7 +1347,7 @@ motion_scale = Vector2(0.1, 0.1)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2(1.52588e-05, 4)
 scale = Vector2(1.8, 1.35)
-texture = ExtResource("1_5n3yh")
+texture = ExtResource("1_ktef7")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(576, 320)
@@ -1355,7 +1356,7 @@ motion_scale = Vector2(0.3, 0.3)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 position = Vector2(1.52588e-05, 4)
 scale = Vector2(1.8, 1.35)
-texture = ExtResource("2_0n17k")
+texture = ExtResource("2_l1je0")
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(576, 320)
@@ -1364,7 +1365,7 @@ motion_scale = Vector2(0.5, 0.5)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
 position = Vector2(1.52588e-05, 4)
 scale = Vector2(1.8, 1.35)
-texture = ExtResource("3_g3y3g")
+texture = ExtResource("3_ae2j3")
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(576, 320)
@@ -1373,7 +1374,7 @@ motion_scale = Vector2(0.7, 0.7)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
 position = Vector2(1.52588e-05, 4)
 scale = Vector2(1.8, 1.35)
-texture = ExtResource("4_6e24c")
+texture = ExtResource("4_mg55r")
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(576, 320)
@@ -1382,7 +1383,7 @@ motion_scale = Vector2(0.9, 0.9)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
 position = Vector2(1.52588e-05, 4)
 scale = Vector2(1.8, 1.35)
-texture = ExtResource("5_5ycvo")
+texture = ExtResource("5_21oen")
 
 [node name="Collision" type="Node2D" parent="."]
 
@@ -1439,12 +1440,15 @@ one_way_collision = true
 tile_map_data = PackedByteArray("AAAAABMAAQAPAAEAAAABABMAAQAQAAEAAAACABMAAQARAAEAAAADABMAAQASAAEAAAAEABMAAQAPAAEAAAAFABMAAQAQAAEAAAAGABMAAQARAAEAAAAHABMAAQAPAAEAAAAIABMAAQAQAAEAAAAJABMAAQARAAEAAAAKABMAAQASAAEAAAALABMAAQAQAAEAAAAMABMAAQARAAEAAAANABMAAQARAAEAAAAOABMAAQASAAEAAAAPABMAAQAPAAEAAAAQABMAAQAQAAEAAAARABMAAQAPAAEAAAASABMAAQAQAAEAAAATABMAAQARAAEAAAAUABMAAQAPAAEAAAAVABMAAQAQAAEAAAAWABMAAQARAAEAAAAXABMAAQASAAEAAAAYABMAAQAPAAEAAAAZABMAAQAQAAEAAAAaABMAAQARAAEAAAAbABMAAQAPAAEAAAAcABMAAQAQAAEAAAAdABMAAQARAAEAAAAeABMAAQAPAAEAAAAfABMAAQAQAAEAAAAgABMAAQARAAEAAAAhABMAAQASAAEAAAAiABMAAQARAAEAAAAjABMAAQASAAEAAAAAABIAAQAMAAsAAAABABIAAQAQAAAAAAACABIAAQARAAAAAAADABIAAQASAAAAAAAEABIAAQAPAAAAAAAFABIAAQAQAAAAAAAGABIAAQARAAAAAAAHABIAAQAPAAAAAAAIABIAAQAQAAAAAAAJABIAAQARAAAAAAAKABIAAQASAAAAAAALABIAAQAQAAAAAAAMABIAAQARAAAAAAANABIAAQARAAAAAAAOABIAAQASAAAAAAAPABIAAQAPAAAAAAAQABIAAQAQAAAAAAARABIAAQAIABwAAAASABIAAQAJABwAAAATABIAAQARAAAAAAAUABIAAQAPAAAAAAAVABIAAQAQAAAAAAAWABIAAQARAAAAAAAXABIAAQASAAAAAAAYABIAAQAPAAAAAAAZABIAAQAQAAAAAAAaABIAAQARAAAAAAAbABIAAQAPAAAAAAAcABIAAQAQAAAAAAAdABIAAQARAAAAAAAeABIAAQAPAAAAAAAfABIAAQAQAAAAAAAgABIAAQARAAAAAAAhABIAAQASAAAAAAAiABIAAQARAAAAAAAjABIAAQALAAsAAAAAABQAAQAPAAIAAAABABQAAQAQAAIAAAACABQAAQARAAIAAAADABQAAQAPAAMAAAAEABQAAQAQAAMAAAAFABQAAQARAAMAAAAGABQAAQASAAMAAAAHABQAAQASAAIAAAAIABQAAQAPAAIAAAAJABQAAQAQAAIAAAAKABQAAQARAAIAAAALABQAAQASAAIAAAAMABQAAQAPAAIAAAANABQAAQAQAAIAAAAOABQAAQARAAIAAAAPABQAAQAPAAIAAAAQABQAAQAQAAIAAAARABQAAQARAAIAAAASABQAAQASAAIAAAATABQAAQASAAIAAAAUABQAAQAPAAMAAAAVABQAAQAQAAMAAAAWABQAAQARAAMAAAAXABQAAQASAAMAAAAYABQAAQAQAAIAAAAZABQAAQARAAIAAAAaABQAAQASAAIAAAAbABQAAQAPAAIAAAAcABQAAQAQAAIAAAAdABQAAQARAAIAAAAeABQAAQASAAIAAAAfABQAAQAPAAIAAAAgABQAAQAPAAIAAAAhABQAAQAQAAIAAAAiABQAAQARAAIAAAAjABQAAQASAAIAAAARABEAAQAbAAEAAAASABAAAQAcAAAAAAASABEAAQAcAAEAAAAPAA0AAQAOAAcAAAAQAA0AAQAPAAcAAAARAA0AAQAQAAcAAAARAA4AAQAbAAAAAAARAA8AAQAbAAEAAAASAA0AAQARAAcAAAASAA4AAQAcAAAAAAASAA8AAQAcAAEAAAATAA0AAQASAAcAAAAUAA0AAQATAAcAAAANABAAAQAXAAAAAAANABEAAQAXAAEAAAAOABAAAQAYAAAAAAAOABEAAQAYAAEAAAAPABAAAQAZAAAAAAAPABEAAQAZAAEAAAAQABAAAQAaAAAAAAAQABEAAQAaAAEAAAATABAAAQAdAAAAAAATABEAAQAdAAEAAAAUABAAAQAeAAAAAAAUABEAAQAeAAEAAAAVABAAAQAfAAAAAAAVABEAAQAfAAEAAAAWABAAAQAgAAAAAAAWABEAAQAgAAEAAAARABAAAQAbAAAAAAAQAAoAAQAaAAIAAAAQAAsAAQAaAAMAAAARAAoAAQAbAAIAAAARAAsAAQAbAAMAAAASAAoAAQAcAAIAAAASAAsAAQAcAAMAAAATAAoAAQAdAAIAAAATAAsAAQAdAAMAAAARAAgAAQAUAAMAAAARAAkAAQAUAAQAAAASAAgAAQAVAAMAAAASAAkAAQAVAAQAAAARAAwAAQAbAAIAAAASAAwAAQAcAAIAAAAOAA4AAQAXAAAAAAAOAA8AAQAXAAEAAAAPAA4AAQAYAAAAAAAPAA8AAQAYAAEAAAAQAA4AAQAZAAAAAAAQAA8AAQAZAAEAAAATAA4AAQAeAAAAAAATAA8AAQAeAAEAAAAUAA4AAQAfAAAAAAAUAA8AAQAfAAEAAAAVAA4AAQAgAAAAAAAVAA8AAQAgAAEAAAAAAAcAAQAMAAAAAAAAAAgAAQAMAAEAAAAAAAkAAQAMAAIAAAAAAAoAAQAMAAMAAAAAAAsAAQAMAAQAAAAAAAwAAQAMAAUAAAAAAA0AAQAMAAYAAAAAAA4AAQAMAAcAAAAAAA8AAQAMAAgAAAAAABAAAQAMAAkAAAABAAcAAQANAAAAAAABAAgAAQANAAEAAAABAAkAAQANAAIAAAABAAoAAQANAAMAAAABAAsAAQANAAQAAAABAAwAAQANAAUAAAABAA0AAQANAAYAAAABAA4AAQANAAcAAAABAA8AAQANAAgAAAABABAAAQANAAkAAAAAAP3/AQAMAAAAAAAAAP7/AQAMAAEAAAAAAP//AQAMAAIAAAAAAAAAAQAMAAMAAAAAAAEAAQAMAAQAAAAAAAIAAQAMAAUAAAAAAAMAAQAMAAYAAAAAAAQAAQAMAAcAAAAAAAUAAQAMAAgAAAAAAAYAAQAMAAkAAAABAP3/AQANAAAAAAABAP7/AQANAAEAAAABAP//AQANAAIAAAABAAAAAQANAAMAAAABAAEAAQANAAQAAAABAAIAAQANAAUAAAABAAMAAQANAAYAAAABAAQAAQANAAcAAAABAAUAAQANAAgAAAABAAYAAQANAAkAAAAiAAcAAQAKAAAAAAAiAAgAAQAKAAEAAAAiAAkAAQAKAAIAAAAiAAoAAQAKAAMAAAAiAAsAAQAKAAQAAAAiAAwAAQAKAAUAAAAiAA0AAQAKAAYAAAAiAA4AAQAKAAcAAAAiAA8AAQAKAAgAAAAiABAAAQAKAAkAAAAjAAcAAQALAAAAAAAjAAgAAQALAAEAAAAjAAkAAQALAAIAAAAjAAoAAQALAAMAAAAjAAsAAQALAAQAAAAjAAwAAQALAAUAAAAjAA0AAQALAAYAAAAjAA4AAQALAAcAAAAjAA8AAQALAAgAAAAjABAAAQALAAkAAAAiAP3/AQAKAAAAAAAiAP7/AQAKAAEAAAAiAP//AQAKAAIAAAAiAAAAAQAKAAMAAAAiAAEAAQAKAAQAAAAiAAIAAQAKAAUAAAAiAAMAAQAKAAYAAAAiAAQAAQAKAAcAAAAiAAUAAQAKAAgAAAAiAAYAAQAKAAkAAAAjAP3/AQALAAAAAAAjAP7/AQALAAEAAAAjAP//AQALAAIAAAAjAAAAAQALAAMAAAAjAAEAAQALAAQAAAAjAAIAAQALAAUAAAAjAAMAAQALAAYAAAAjAAQAAQALAAcAAAAjAAUAAQALAAgAAAAjAAYAAQALAAkAAAAAABEAAQAMAAoAAAAjABEAAQALAAoAAAA=")
 tile_set = SubResource("TileSet_6e24c")
 
-[node name="Player" parent="." instance=ExtResource("1_dojpo")]
-position = Vector2(304, 448)
+[node name="Shrine" parent="." instance=ExtResource("8_l1je0")]
+position = Vector2(256, 608)
+
+[node name="Player" parent="." instance=ExtResource("8_seeu7")]
+position = Vector2(256, 528)
 
 [node name="FrontTiles" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAARABIAAQABABEAAAASABIAAQACABEAAAAAABIAAgABAA0AAAAAABMAAgABAA4AAAABABIAAgACAA0AAAABABMAAgACAA4AAAACABIAAgADAA0AAAACABMAAgADAA4AAAADABIAAgAEAA0AAAADABMAAgAEAA4AAAAEABIAAgAFAA0AAAAEABMAAgAFAA4AAAAFABIAAgAGAA0AAAAFABMAAgAGAA4AAAA=")
 tile_set = SubResource("TileSet_6e24c")
 
-[node name="SkeletonSwordsman" parent="." instance=ExtResource("9_6e24c")]
+[node name="SkeletonSwordsman" parent="." instance=ExtResource("9_hlooo")]
 position = Vector2(928, 600)

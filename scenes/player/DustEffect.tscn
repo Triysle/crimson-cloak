@@ -1,51 +1,51 @@
 [gd_scene load_steps=16 format=3 uid="uid://8e06oopqn18g"]
 
-[ext_resource type="Texture2D" uid="uid://q6e6dqdqhxkn" path="res://assets/player/SS_Game_Player_v.1.0/dust_jump/dust_jump.png" id="1_dsn2j"]
-[ext_resource type="Texture2D" uid="uid://dutkl3ratmy2t" path="res://assets/player/SS_Game_Player_v.1.0/dust_land/dust_land.png" id="2_3darp"]
-[ext_resource type="Script" uid="uid://cexcvuewex3v1" path="res://scripts/player/DustEffect.gd" id="3_3darp"]
+[ext_resource type="Texture2D" uid="uid://q6e6dqdqhxkn" path="res://assets/player/SS_Game_Player_v.1.0/dust_jump/dust_jump.png" id="1_daadl"]
+[ext_resource type="Texture2D" uid="uid://dutkl3ratmy2t" path="res://assets/player/SS_Game_Player_v.1.0/dust_land/dust_land.png" id="2_qmaw7"]
+[ext_resource type="Script" uid="uid://cexcvuewex3v1" path="res://scripts/player/DustEffect.gd" id="3_2upit"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qriej"]
-atlas = ExtResource("1_dsn2j")
+atlas = ExtResource("1_daadl")
 region = Rect2(0, 0, 64, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ak0y1"]
-atlas = ExtResource("1_dsn2j")
+atlas = ExtResource("1_daadl")
 region = Rect2(64, 0, 64, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_02trm"]
-atlas = ExtResource("1_dsn2j")
+atlas = ExtResource("1_daadl")
 region = Rect2(128, 0, 64, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n708q"]
-atlas = ExtResource("1_dsn2j")
+atlas = ExtResource("1_daadl")
 region = Rect2(192, 0, 64, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wpud0"]
-atlas = ExtResource("1_dsn2j")
+atlas = ExtResource("1_daadl")
 region = Rect2(256, 0, 64, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c02ge"]
-atlas = ExtResource("2_3darp")
+atlas = ExtResource("2_qmaw7")
 region = Rect2(0, 0, 64, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d3ol8"]
-atlas = ExtResource("2_3darp")
+atlas = ExtResource("2_qmaw7")
 region = Rect2(64, 0, 64, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nd3h0"]
-atlas = ExtResource("2_3darp")
+atlas = ExtResource("2_qmaw7")
 region = Rect2(128, 0, 64, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_62nqu"]
-atlas = ExtResource("2_3darp")
+atlas = ExtResource("2_qmaw7")
 region = Rect2(192, 0, 64, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_imagd"]
-atlas = ExtResource("2_3darp")
+atlas = ExtResource("2_qmaw7")
 region = Rect2(256, 0, 64, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7d4t8"]
-atlas = ExtResource("2_3darp")
+atlas = ExtResource("2_qmaw7")
 region = Rect2(320, 0, 64, 40)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_58ynr"]
@@ -99,6 +99,6 @@ sprite_frames = SubResource("SpriteFrames_58ynr")
 animation = &"jump"
 frame = 4
 frame_progress = 1.0
-script = ExtResource("3_3darp")
+script = ExtResource("3_2upit")
 
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

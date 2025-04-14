@@ -36,7 +36,7 @@ var hud = null
 @onready var state_machine = $StateMachine
 
 # Preload the dust effect scene
-const DustEffect = preload("res://scenes/DustEffect.tscn")
+const DustEffect = preload("res://scenes/player/DustEffect.tscn")
 
 func _ready():
 	# Debug prints
@@ -227,3 +227,12 @@ func _input(event):
 	# Check for healing input
 	if event.is_action_pressed("heal"):
 		use_healing()
+
+func heal_to_full():
+	# Restore health to maximum
+	health = max_health
+	print("Player healed to full health!")
+	
+	# Update the HUD
+	if hud:
+		hud.update_health(health, max_health)
