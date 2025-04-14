@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://q8f84bu3ojuy"]
 
-[ext_resource type="Script" uid="uid://rc1pkqhhnl55" path="res://scenes/ui/HUD.gd" id="1_atyv1"]
+[ext_resource type="Script" uid="uid://rc1pkqhhnl55" path="res://scripts/player/HUD.gd" id="1_atyv1"]
 [ext_resource type="Texture2D" uid="uid://dkgr37by83b4g" path="res://assets/ui/health/health-bar-ticks.svg" id="2_4ed8p"]
 [ext_resource type="Texture2D" uid="uid://c5co5gu01jxtq" path="res://assets/ui/currency/ancient-coin-icon(1).svg" id="2_6ll6g"]
 [ext_resource type="Texture2D" uid="uid://dweyav0e5ku4r" path="res://assets/ui/health/HealthSegmentFull.png" id="2_ig75s"]
