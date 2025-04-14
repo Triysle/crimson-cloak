@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cflg4c8he333p" path="res://assets/player/SS_Game_Player_v.1.0/idle/idle.png" id="2_3li8b"]
 [ext_resource type="Script" uid="uid://duj0scoibrs1c" path="res://scripts/player/ShadowTrail.gd" id="2_61ith"]
 [ext_resource type="Texture2D" uid="uid://bw42grq88qh2q" path="res://assets/player/SS_Game_Player_v.1.0/run/run.png" id="2_mdl7e"]
-[ext_resource type="Shader" uid="uid://diha6a5x3fple" path="res://scenes/Player.gdshader" id="3_b8lor"]
+[ext_resource type="Shader" uid="uid://diha6a5x3fple" path="res://scripts/shaders/CloakShader.gdshader" id="3_b8lor"]
 [ext_resource type="Texture2D" uid="uid://lu1jx1b2mnva" path="res://assets/player/SS_Game_Player_v.1.0/jump/jump.png" id="4_qu4a1"]
 [ext_resource type="Texture2D" uid="uid://b40b1symjq0uw" path="res://assets/player/SS_Game_Player_v.1.0/jump/jump_fall.png" id="5_70d11"]
 [ext_resource type="Script" uid="uid://nn3oeimt1pme" path="res://scripts/player/StateMachine.gd" id="6_6eyey"]
