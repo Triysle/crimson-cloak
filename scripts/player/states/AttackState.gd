@@ -134,11 +134,7 @@ func update_attack_hitbox():
 		print("No CollisionShape2D found in AttackBox!")
 		return
 	
-	# Update attack box position based on player direction
-	var offset = Vector2(24, -16)  # Adjust this offset based on your sprite
-	if player.sprite.flip_h:
-		offset.x = -offset.x
-	attack_box.position = offset
+	attack_box.position.x = 0 if not player.sprite.flip_h else -32
 	
 	# Enable hitbox during the middle frames of the attack animation
 	# The specific timing will depend on your animation
