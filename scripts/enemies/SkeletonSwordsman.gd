@@ -62,6 +62,9 @@ func _ready():
 	# Ensure attack box is initially disabled
 	if attack_box.has_node("CollisionShape2D"):
 		attack_box.get_node("CollisionShape2D").disabled = true
+	
+	# Register this enemy with the GameManager
+	GameManager.register_enemy(self)
 
 func _physics_process(delta):
 	# Apply gravity if not on floor

@@ -4,6 +4,10 @@ extends Node
 var current_shrine: Node = null
 var player: CharacterBody2D = null
 
+# Enemy tracking
+var enemy_tracker = {}  # Dictionary to track enemies: { instance_id: { "scene": packed_scene, "position": Vector2 } }
+var dead_enemies = []   # Array to store IDs of defeated enemies
+
 func _ready():
 	# Wait for level to be fully loaded
 	await get_tree().process_frame
@@ -49,8 +53,64 @@ func spawn_player_at_initial_shrine():
 func on_shrine_activated(shrine):
 	# Update current shrine
 	current_shrine = shrine
+	
+	# Respawn all dead enemies when a shrine is activated
+	respawn_all_enemies()
 
 # Function to respawn player at last activated shrine
 func respawn_player():
 	if current_shrine && player:
+		# Respawn all dead enemies
+		respawn_all_enemies()
+		
+		# Respawn player at shrine
 		player.respawn_at(current_shrine.global_position)
+
+# Function to register an enemy with the tracker
+func register_enemy(enemy: Node):
+	# Store enemy's original scene path and spawn position
+	var enemy_data = {
+		"scene": enemy.scene_file_path,
+		"position": enemy.global_position,
+		"properties": {}  # This could store additional enemy properties if needed
+	}
+	
+	# Store in the dictionary with instance ID as key
+	enemy_tracker[enemy.get_instance_id()] = enemy_data
+	
+	# Connect to the enemy's tree_exiting signal to handle cleanup
+	if !enemy.tree_exiting.is_connected(_on_enemy_tree_exiting):
+		enemy.tree_exiting.connect(_on_enemy_tree_exiting.bind(enemy))
+
+# Called when an enemy is removed from the scene tree
+func _on_enemy_tree_exiting(enemy: Node):
+	var instance_id = enemy.get_instance_id()
+	
+	# Add to dead_enemies list if it was in our tracker
+	if enemy_tracker.has(instance_id):
+		dead_enemies.append(instance_id)
+
+# Function to respawn all dead enemies
+func respawn_all_enemies():
+	# Process all dead enemies
+	for enemy_id in dead_enemies:
+		if enemy_tracker.has(enemy_id):
+			var enemy_data = enemy_tracker[enemy_id]
+			
+			# Load the enemy scene
+			var enemy_scene = load(enemy_data["scene"])
+			if enemy_scene:
+				# Instance the enemy
+				var new_enemy = enemy_scene.instantiate()
+				
+				# Set position
+				new_enemy.global_position = enemy_data["position"]
+				
+				# Add to the current scene
+				get_tree().current_scene.add_child(new_enemy)
+				
+				# Register the new enemy
+				register_enemy(new_enemy)
+	
+	# Clear the dead enemies list
+	dead_enemies.clear()
