@@ -270,6 +270,13 @@ func _handle_hit_state(delta):
 			idle_timer = 0.0
 
 func _handle_dead_state(_delta):
+		# Freeze horizontal movement
+	velocity.x = 0
+	
+	# We want to keep collision with the floor but disable other interactions
+	set_collision_layer_value(4, false)  # Disable enemy layer
+	set_collision_mask_value(2, false)   # Disable interaction with player
+	
 	# Only play death animation once
 	if not death_animation_started:
 		death_animation_started = true
@@ -278,13 +285,6 @@ func _handle_dead_state(_delta):
 		# Connect the animation_finished signal if not already connected
 		if not animation_player.animation_finished.is_connected(_on_death_animation_finished):
 			animation_player.animation_finished.connect(_on_death_animation_finished)
-	
-	# We want to keep collision with the floor but disable other interactions
-	set_collision_layer_value(2, false)  # Disable enemy layer
-	set_collision_mask_value(2, false)   # Disable interaction with player
-	
-	# Freeze horizontal movement
-	velocity.x = 0
 
 func _on_death_animation_finished(anim_name):
 	print("Animation finished: ", anim_name)

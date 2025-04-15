@@ -50,10 +50,10 @@ script = ExtResource("1_atyv1")
 
 [node name="Background" type="NinePatchRect" parent="."]
 texture_filter = 1
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 310.0
-offset_bottom = 80.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 296.0
+offset_bottom = 72.0
 texture = ExtResource("2_rnyu1")
 patch_margin_left = 8
 patch_margin_top = 8
@@ -91,7 +91,7 @@ offset_right = 282.0
 offset_bottom = 26.0
 theme_override_styles/background = SubResource("StyleBoxFlat_4ed8p")
 theme_override_styles/fill = SubResource("StyleBoxFlat_rnyu1")
-value = 55.0
+value = 100.0
 show_percentage = false
 
 [node name="HealthTicks" type="TextureRect" parent="Background"]
@@ -116,24 +116,28 @@ texture = ExtResource("2_ig75s")
 expand_mode = 1
 
 [node name="HealthContainer2" type="TextureRect" parent="Background/HealthContainers"]
+visible = false
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 texture = ExtResource("2_ig75s")
 expand_mode = 1
 
 [node name="HealthContainer3" type="TextureRect" parent="Background/HealthContainers"]
+visible = false
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 texture = ExtResource("2_ig75s")
 expand_mode = 1
 
 [node name="HealthContainer4" type="TextureRect" parent="Background/HealthContainers"]
+visible = false
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 texture = ExtResource("3_ig75s")
 expand_mode = 1
 
 [node name="HealthContainer5" type="TextureRect" parent="Background/HealthContainers"]
+visible = false
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 texture = ExtResource("3_ig75s")
@@ -152,7 +156,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 18
-text = "00000"
+text = "0"
 horizontal_alignment = 2
 
 [node name="CoinIcon" type="TextureRect" parent="Background/CoinDisplay"]
