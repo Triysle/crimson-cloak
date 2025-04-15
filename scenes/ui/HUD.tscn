@@ -49,6 +49,7 @@ corner_radius_bottom_left = 2
 script = ExtResource("1_atyv1")
 
 [node name="Background" type="NinePatchRect" parent="."]
+texture_filter = 1
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 310.0
