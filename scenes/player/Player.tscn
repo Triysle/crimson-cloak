@@ -38,6 +38,7 @@ shader_parameter/tolerance = 0.1
 shader_parameter/alpha_override = 1.0
 shader_parameter/hurt_effect = 0.0
 shader_parameter/pulse_time = 0.0
+shader_parameter/outline_width = 1.0
 
 [sub_resource type="Animation" id="Animation_g2els"]
 length = 0.001
