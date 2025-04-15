@@ -10,6 +10,7 @@ var current_state = State.IDLE
 @export var max_health: int = 80
 @export var health: int = 80
 @export var damage: int = 15
+@export var contact_damage: float = 5
 @export var movement_speed: float = 70.0
 @export var attack_range: float = 100.0
 @export var detection_range: float = 200.0
@@ -39,7 +40,6 @@ var death_animation_started = false
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var detection_area: Area2D = $DetectionArea
-@onready var hit_box: Area2D = $HitBox
 @onready var attack_box: Area2D = $AttackBox
 
 func _ready():
@@ -88,6 +88,15 @@ func _physics_process(delta):
 	
 	# Apply movement
 	move_and_slide()
+	
+	# Check for collision with player after moving
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		
+		if collider.is_in_group("player") and collider.has_method("take_damage"):			
+			# Pass our position to determine hit direction
+			collider.take_damage(contact_damage, global_position)
 
 func _handle_idle_state(delta):
 	# Play idle animation

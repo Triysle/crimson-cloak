@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://soit815ldxsc"]
+[gd_scene load_steps=49 format=3 uid="uid://soit815ldxsc"]
 
 [ext_resource type="Script" uid="uid://bld4bam1vxlmc" path="res://scripts/enemies/SkeletonSwordsman.gd" id="1_b81lu"]
 [ext_resource type="Texture2D" uid="uid://dmug5l8481i26" path="res://assets/enemies/HeroandOpponents_v1/1 Enemy/PNG/idle-1.png" id="2_1fi22"]
@@ -39,7 +39,8 @@
 [ext_resource type="Texture2D" uid="uid://bjio50bgwsccg" path="res://assets/enemies/HeroandOpponents_v1/1 Enemy/PNG/dead-4.png" id="37_tg1vt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0nssj"]
-height = 64.0
+radius = 7.0
+height = 63.0
 
 [sub_resource type="Animation" id="Animation_xd6ye"]
 length = 0.001
@@ -210,10 +211,6 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_fvjlx"]
 radius = 200.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2vl5"]
-radius = 4.0
-height = 50.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_4liro"]
 radius = 32.0
 
@@ -240,14 +237,6 @@ collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_fvjlx")
-
-[node name="HitBox" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(0, -32)
-shape = SubResource("CapsuleShape2D_g2vl5")
 
 [node name="AttackBox" type="Area2D" parent="."]
 collision_layer = 4
