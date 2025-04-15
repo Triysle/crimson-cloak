@@ -74,8 +74,8 @@ func _process(_delta):
 
 # The physics_process is now much simpler as states handle the logic
 func _physics_process(_delta):
-	# No logic here, it's all in the states
-	pass
+	# Always update attack box position
+	update_attack_box_position()
 
 func fall_through_platforms():
 	# Set velocity downward to start falling
@@ -267,3 +267,16 @@ func die():
 	
 	# Transition to death state instead of playing animation directly
 	state_machine.transition_to("death")
+
+func update_attack_box_position():
+	var attack_box = $AttackBox
+	if not attack_box:
+		return
+	
+	# Fixed position relative to player
+	var offset = Vector2(16, -16)  # Adjust X value based on your needs
+	if sprite.flip_h:
+		offset.x = -offset.x
+	
+	# Set the position
+	attack_box.position = offset
