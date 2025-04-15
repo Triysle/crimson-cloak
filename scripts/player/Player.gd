@@ -258,17 +258,12 @@ func die():
 	# Disable player control
 	can_control = false
 	
-	animation_player.play("die")
-	
-	# Player death logic here (like playing death animation if you have one)
+	# Set health to 0
 	health = 0
 	
 	# Update HUD
 	if hud:
 		hud.update_health(health, max_health)
 	
-	# Call respawn after a short delay
-	await get_tree().create_timer(1.0).timeout
-	
-	# Use GameManager to respawn
-	GameManager.respawn_player()
+	# Transition to death state instead of playing animation directly
+	state_machine.transition_to("death")
