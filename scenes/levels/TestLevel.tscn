@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://q38lunwb3chr"]
+[gd_scene load_steps=21 format=4 uid="uid://q38lunwb3chr"]
 
 [ext_resource type="Texture2D" uid="uid://boycs7bxs2vi7" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background1.png" id="1_ktef7"]
 [ext_resource type="Texture2D" uid="uid://cn68fhsa85ebr" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background2.png" id="2_l1je0"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://poxg7ogoihuv" path="res://scenes/objects/Shrine.tscn" id="8_l1je0"]
 [ext_resource type="PackedScene" uid="uid://bryfivf4t1wgy" path="res://scenes/player/Player.tscn" id="8_seeu7"]
 [ext_resource type="PackedScene" uid="uid://soit815ldxsc" path="res://scenes/enemies/SkeletonSwordsman.tscn" id="9_hlooo"]
-[ext_resource type="PackedScene" uid="uid://dfaiu0koi8np" path="res://scenes/objects/Door.tscn" id="11_ae2j3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g3y3g"]
 texture = ExtResource("6_o0skh")
@@ -1455,10 +1454,3 @@ one_way_collision = true
 position = Vector2(0, -100)
 shape = SubResource("RectangleShape2D_pyy5p")
 one_way_collision = true
-
-[node name="Door" parent="." instance=ExtResource("11_ae2j3")]
-position = Vector2(24, 600)
-door_name = "TestLevelW"
-target_door = "VillageNE"
-target_scene = "res://scenes/levels/Village.tscn"
-activates_on_touch = true

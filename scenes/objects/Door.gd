@@ -14,25 +14,15 @@ signal door_activated
 
 # Reference to the player
 var player = null
-# Cooldown to prevent immediate re-activation
-var active: bool = true
-var cooldown_timer: float = 0.5
 
 func _ready():
 	# Connect to the area's body detection signals
 	var area = $Area2D
 	area.body_entered.connect(_on_body_entered)
 	area.body_exited.connect(_on_body_exited)
-	
-	# Check if this is a target door from a transition
-	if SceneTransition.target_door == door_name:
-		# Disable the door temporarily to prevent immediate activation
-		active = false
-		# Create a timer to re-enable the door
-		create_tween().tween_callback(func(): active = true).set_delay(cooldown_timer)
 
 func _on_body_entered(body):
-	if body.is_in_group("player") and active:
+	if body.is_in_group("player"):
 		player = body
 		
 		# If door activates on touch, trigger immediately
@@ -45,7 +35,7 @@ func _on_body_exited(body):
 
 func _input(event):
 	# Only process input if player is in range and door doesn't activate on touch
-	if player and not activates_on_touch and active:
+	if player and not activates_on_touch:
 		if event.is_action_pressed("move_up"):
 			use_door()
 

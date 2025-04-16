@@ -6090,7 +6090,3 @@ position = Vector2(528, 216)
 
 [node name="Door" parent="." instance=ExtResource("20_ou88b")]
 position = Vector2(1152, 184)
-door_name = "VillageNE"
-target_door = "TestLevelW"
-target_scene = "res://scenes/levels/TestLevel.tscn"
-activates_on_touch = true
