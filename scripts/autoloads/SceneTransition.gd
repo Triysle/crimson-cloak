@@ -11,6 +11,7 @@ func _ready():
 func _connect_to_scene_tree():
 	# Wait for one frame to make sure the scene is fully loaded
 	await get_tree().process_frame
+	await get_tree().process_frame  # Sometimes a second wait is needed
 	
 	# Find the target door and position the player there
 	if target_door != "":
@@ -29,14 +30,8 @@ func _position_player_at_door(door_name: String):
 			if player:
 				# Position the player at the door
 				player.global_position = door.global_position
-				# You might want to offset this slightly depending on your game
-				player.global_position.y += 10  # Small offset to ensure player is on the ground
 				
-				# For doors on different sides, you might want to face the player appropriately
-				# For example: player.sprite.flip_h = false  # Face right
-				
-				# Clear the target door
-				target_door = ""
+				# We're done (but leave target_door set for the door's _ready function)
 				return
 	
 	# If we didn't find the door, log a warning
