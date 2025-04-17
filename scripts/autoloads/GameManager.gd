@@ -4,6 +4,10 @@ extends Node
 var current_shrine: Node = null
 var player: CharacterBody2D = null
 
+# Door and scene transition variables
+var active_door = null
+var player_keys = []  # Simple array to hold keys for now
+
 # Enemy tracking
 var enemy_tracker = {}  # Dictionary to track enemies: { instance_id: { "scene": packed_scene, "position": Vector2 } }
 var dead_enemies = []   # Array to store IDs of defeated enemies
@@ -114,3 +118,64 @@ func respawn_all_enemies():
 	
 	# Clear the dead enemies list
 	dead_enemies.clear()
+
+# Function to set the active door when player enters door area
+func set_active_door(door):
+	active_door = door
+
+# Function to check if player has a specific key
+func has_key(key_name):
+	return key_name in player_keys
+
+# Function to add a key to the player's inventory
+func add_key(key_name):
+	if not key_name in player_keys:
+		player_keys.append(key_name)
+		print("Obtained key: " + key_name)
+
+# Function to handle scene transitions
+func transition_to_scene(target_scene, target_door):
+	print("Transitioning to " + target_scene + " at door " + target_door)
+	
+	# Create a black rect for fade effect
+	var fade_rect = ColorRect.new()
+	fade_rect.color = Color(0, 0, 0, 0)  # Start transparent
+	fade_rect.size = get_viewport().get_visible_rect().size
+	fade_rect.z_index = 100  # Make sure it's on top
+	
+	get_tree().get_root().add_child(fade_rect)
+	
+	# Fade out
+	var tween = create_tween()
+	tween.tween_property(fade_rect, "color", Color(0, 0, 0, 1), 0.5)
+	
+	# Wait for fade to complete then change scene
+	await tween.finished
+	
+	# Change the scene
+	get_tree().change_scene_to_file(target_scene)
+	
+	# Wait for the next frame to ensure the scene is loaded
+	await get_tree().process_frame
+	
+	# Find the target door in the new scene
+	var doors = get_tree().get_nodes_in_group("door")
+	var spawn_position = Vector2.ZERO
+	
+	for door in doors:
+		if door.door_name == target_door:
+			spawn_position = door.global_position
+			break
+	
+	# Find player and position them at the target door
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		player.global_position = spawn_position
+	
+	# Fade in
+	tween = create_tween()
+	tween.tween_property(fade_rect, "color", Color(0, 0, 0, 0), 0.5)
+	
+	# Remove the fade rect when done
+	await tween.finished
+	fade_rect.queue_free()

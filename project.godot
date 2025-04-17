@@ -25,6 +25,7 @@ player=""
 enemy=""
 hud=""
 shrine=""
+door=""
 
 [input]
 

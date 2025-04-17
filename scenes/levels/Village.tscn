@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=4 uid="uid://brmh5m7v2qi66"]
+[gd_scene load_steps=102 format=4 uid="uid://brmh5m7v2qi66"]
 
 [ext_resource type="Texture2D" uid="uid://boycs7bxs2vi7" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background1.png" id="1_hk3d2"]
 [ext_resource type="Texture2D" uid="uid://cn68fhsa85ebr" path="res://assets/env/SSW_CastlePack_v1.0/_PNG/Background2.png" id="2_ps24v"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://b52xusxig0ul3" path="res://assets/env/SSWorlds_SET1_v1.0/_PNG/anim/grass3.png" id="14_ou88b"]
 [ext_resource type="PackedScene" uid="uid://crbvlil3g4o32" path="res://scenes/NPCs/Vendor.tscn" id="15_ou88b"]
 [ext_resource type="PackedScene" uid="uid://bryfivf4t1wgy" path="res://scenes/player/Player.tscn" id="18_hwjq1"]
+[ext_resource type="PackedScene" uid="uid://cx5r4wtafyxn1" path="res://scenes/objects/Door.tscn" id="19_ou88b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nputg"]
 size = Vector2(8, 768)
@@ -5967,119 +5968,102 @@ autoplay = "Grass1"
 
 [node name="Grass14" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(752, 400)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass1"
 autoplay = "Grass1"
 
 [node name="Grass15" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(944, 464)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass3"
 autoplay = "Grass3"
 
 [node name="Grass16" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(1096, 560)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass1"
 autoplay = "Grass1"
 
 [node name="Grass17" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(1112, 560)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass2"
 autoplay = "Grass1"
 
 [node name="Grass18" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(1080, 560)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass2"
 autoplay = "Grass1"
 
 [node name="Grass19" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(960, 592)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass3"
 autoplay = "Grass3"
 
 [node name="Grass20" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(832, 592)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass3"
 autoplay = "Grass3"
 
 [node name="Grass21" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(752, 592)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass1"
 autoplay = "Grass1"
 
 [node name="Grass22" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(600, 592)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass2"
 autoplay = "Grass1"
 
 [node name="Grass23" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(536, 592)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass2"
 autoplay = "Grass1"
 
 [node name="Grass24" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(384, 592)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass3"
 autoplay = "Grass3"
 
 [node name="Grass25" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(224, 592)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass3"
 autoplay = "Grass3"
 
 [node name="Grass26" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(144, 592)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass3"
 autoplay = "Grass3"
 
 [node name="Grass27" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(72, 624)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass1"
 autoplay = "Grass1"
 
 [node name="Grass28" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(8, 624)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass1"
 autoplay = "Grass1"
 
 [node name="Grass29" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(8, 624)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass2"
 autoplay = "Grass2"
 
 [node name="Grass30" type="AnimatedSprite2D" parent="Grass"]
 position = Vector2(48, 336)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_0iglt")
 animation = &"Grass2"
 autoplay = "Grass2"
@@ -6096,6 +6080,13 @@ position = Vector2(352, 256)
 
 [node name="Vendor" parent="." instance=ExtResource("15_ou88b")]
 position = Vector2(896, 608)
+
+[node name="Door" parent="." instance=ExtResource("19_ou88b")]
+position = Vector2(1152, 192)
+door_name = "VillageNE"
+target_scene = "res://scenes/levels/TestLevel.tscn"
+target_door = "TestLevelW"
+auto_transition = true
 
 [node name="Player" parent="." instance=ExtResource("18_hwjq1")]
 position = Vector2(528, 216)
