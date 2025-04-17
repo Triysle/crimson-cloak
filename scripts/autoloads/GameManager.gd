@@ -175,7 +175,7 @@ func transition_to_scene(target_scene, target_door_id):
 		print("ERROR: Could not find door with name " + target_door_id)
 	
 	# Find player and position them at the target door's spawn point
-	var player = get_tree().get_first_node_in_group("player")
+	player = get_tree().get_first_node_in_group("player")
 	if player:
 		player.global_position = spawn_position
 	else:
