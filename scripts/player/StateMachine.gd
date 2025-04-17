@@ -26,8 +26,6 @@ func _ready():
 	if states.has("idle"):
 		current_state = states["idle"]
 		current_state.enter()
-
-	print("Available states: ", states.keys())
 	
 func _process(delta):
 	if current_state:
@@ -54,7 +52,6 @@ func transition_to(state_name: String):
 			current_state.exit()
 		
 		current_state = states[state_name]
-		print("Successfully transitioned to state:", current_state.name)
 		current_state.enter()
 	else:
 		print("State '", state_name, "' not found in state machine. Available states:", states.keys())

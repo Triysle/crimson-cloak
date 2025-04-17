@@ -134,8 +134,8 @@ func add_key(key_name):
 		print("Obtained key: " + key_name)
 
 # Function to handle scene transitions
-func transition_to_scene(target_scene, target_door):
-	print("Transitioning to " + target_scene + " at door " + target_door)
+func transition_to_scene(target_scene, target_door_id):
+	print("Transitioning to " + target_scene + " at door " + target_door_id)
 	
 	# Create a black rect for fade effect
 	var fade_rect = ColorRect.new()
@@ -157,19 +157,29 @@ func transition_to_scene(target_scene, target_door):
 	
 	# Wait for the next frame to ensure the scene is loaded
 	await get_tree().process_frame
+	await get_tree().process_frame  # Wait one more frame to be sure
 	
 	# Find the target door in the new scene
 	var doors = get_tree().get_nodes_in_group("door")
 	var spawn_position = Vector2.ZERO
+	var target_door = null
 	
 	for door in doors:
-		if door.door_name == target_door:
-			spawn_position = door.global_position
+		if door.door_name == target_door_id:
+			target_door = door
+			# Get the spawn position from the door's spawn point
+			spawn_position = door.get_spawn_position()
 			break
 	
-	# Find player and position them at the target door
+	if target_door == null:
+		print("ERROR: Could not find door with name " + target_door_id)
+	
+	# Find player and position them at the target door's spawn point
+	var player = get_tree().get_first_node_in_group("player")
 	if player:
 		player.global_position = spawn_position
+	else:
+		print("ERROR: Could not find player")
 	
 	# Fade in
 	tween = create_tween()

@@ -14,3 +14,5 @@ position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_74456")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="SpawnPoint" type="Marker2D" parent="."]

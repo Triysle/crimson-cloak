@@ -6087,6 +6087,7 @@ door_name = "VillageNE"
 target_scene = "res://scenes/levels/TestLevel.tscn"
 target_door = "TestLevelW"
 auto_transition = true
+spawn_point_position = "Left"
 
 [node name="Player" parent="." instance=ExtResource("18_hwjq1")]
 position = Vector2(528, 216)

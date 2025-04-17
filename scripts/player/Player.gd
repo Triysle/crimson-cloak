@@ -39,21 +39,10 @@ var hud = null
 const DustEffect = preload("res://scenes/player/DustEffect.tscn")
 
 func _ready():
-	# Debug prints
-	print("Player _ready called")
-	
 	var attack_box = $AttackBox
-	print("AttackBox found: ", attack_box != null)
 	
 	if attack_box and !attack_box.body_entered.is_connected(_on_attack_box_body_entered):
 		attack_box.body_entered.connect(_on_attack_box_body_entered)
-		print("AttackBox signal connected")
-	
-	# Let's also add a simple timer to print our collision mask/layer for debugging
-	await get_tree().create_timer(1.0).timeout
-	print("Player collision layer: ", collision_layer)
-	print("AttackBox collision layer: ", $AttackBox.collision_layer if $AttackBox else "No AttackBox")
-	print("AttackBox collision mask: ", $AttackBox.collision_mask if $AttackBox else "No AttackBox")
 
 	# Find the HUD in the scene
 	await get_tree().process_frame

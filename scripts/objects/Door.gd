@@ -1,17 +1,29 @@
 extends Area2D
 
-# Door properties
+# Original door properties
 @export var door_name: String = "Door"
 @export var target_scene: String = ""
 @export var target_door: String = ""
 @export var required_key: String = ""
 @export var auto_transition: bool = false
+# New spawn point property
+@export_enum("Right", "Center", "Left") var spawn_point_position = "Center"
 
 # Reference to GameManager
 @onready var game_manager = get_node("/root/GameManager")
+@onready var spawn_point = $SpawnPoint
 
 func _ready():
-	# Connect the body entered and exited signals
+	# Set the spawn point position based on the selected option
+	match spawn_point_position:
+		"Right":
+			spawn_point.position.x = 24
+		"Center":
+			spawn_point.position.x = 0
+		"Left":
+			spawn_point.position.x = -24
+	
+	# Connect signals
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 
@@ -41,3 +53,7 @@ func _on_body_exited(body):
 		# Clear active door reference when player leaves
 		if game_manager.active_door == self:
 			game_manager.set_active_door(null)
+			
+# Get the spawn position in global coordinates
+func get_spawn_position():
+	return spawn_point.global_position

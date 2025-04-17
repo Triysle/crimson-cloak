@@ -1462,3 +1462,4 @@ door_name = "TestLevelW"
 target_scene = "res://scenes/levels/Village.tscn"
 target_door = "VillageNE"
 auto_transition = true
+spawn_point_position = "Right"
