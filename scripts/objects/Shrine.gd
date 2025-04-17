@@ -9,6 +9,11 @@ signal shrine_activated
 @export var restore_charges: bool = true                   # Whether to restore healing charges
 @export var is_spawn_point: bool = false  # Whether this shrine should be used as a spawn point
 
+# References to managers
+@onready var level_manager = get_node("/root/LevelManager")
+@onready var player_manager = get_node("/root/PlayerManager")
+@onready var save_manager = get_node("/root/SaveManager")
+
 var is_active_spawn: bool = false        # Whether this shrine is the current active spawn
 var player_in_range: bool = false
 var pulse_time: float = 0.0
@@ -98,6 +103,9 @@ func activate_shrine():
 		
 		# Emit signal for saving game
 		shrine_activated.emit()
+		
+		# Save the game
+		save_manager.save_game()
 		
 		# Heal the player if in range
 		var player = get_tree().get_first_node_in_group("player")

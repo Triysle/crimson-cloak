@@ -13,6 +13,10 @@ extends CharacterBody2D
 @export var healing_charges: int = 1
 @export var healing_amount: int = 25
 
+# References to managers
+@onready var player_manager = get_node("/root/PlayerManager")
+@onready var inventory_manager = get_node("/root/InventoryManager")
+
 # Get the gravity from the project settings to be synced with RigidBody nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -167,8 +171,11 @@ func spawn_dust_effect(animation_name: String):
 	get_tree().current_scene.add_child(dust)
 
 func add_currency(amount: int):
-	currency += amount
-	print("Added ", amount, " currency! Total: ", currency)
+	# Update the inventory manager
+	inventory_manager.add_currency(amount)
+	
+	# Update our local currency variable
+	currency = inventory_manager.currency
 	
 	# Update the HUD
 	if hud:
@@ -255,3 +262,6 @@ func die():
 	
 	# Transition to death state instead of playing animation directly
 	state_machine.transition_to("death")
+	
+	# Notify the PlayerManager
+	player_manager.on_player_death()

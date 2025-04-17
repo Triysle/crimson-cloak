@@ -17,7 +17,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://scripts/autoloads/GameManager.gd"
+InventoryManager="*res://scripts/autoloads/InventoryManager.gd"
+EnemyManager="*res://scripts/autoloads/EnemyManager.gd"
+PlayerManager="*res://scripts/autoloads/PlayerManager.gd"
+LevelManager="*res://scripts/autoloads/LevelManager.gd"
+SaveManager="*res://scripts/autoloads/SaveManager.gd"
+DialogManager="*res://scripts/autoloads/DialogManager.gd"
+ShopManager="*res://scripts/autoloads/ShopManager.gd"
 
 [global_group]
 

@@ -1,5 +1,8 @@
 extends State
 
+# References to managers
+@onready var player_manager = get_node("/root/PlayerManager")
+
 # State tracking
 enum DeathPhase {FALLING, LANDED, ANIMATING, COMPLETED}
 var current_phase = DeathPhase.FALLING
@@ -45,7 +48,7 @@ func physics_update(delta):
 		if death_timer >= post_animation_delay:
 			current_phase = DeathPhase.COMPLETED
 			# Signal that we're ready to respawn
-			GameManager.respawn_player()
+			player_manager.respawn_player()
 	
 	# Move the player
 	player.move_and_slide()

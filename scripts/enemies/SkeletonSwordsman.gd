@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+# References to managers
+@onready var enemy_manager = get_node("/root/EnemyManager")
+
 # States enum
 enum State {IDLE, WANDER, CHASE, ATTACK, HIT, DEAD}
 
@@ -63,8 +66,8 @@ func _ready():
 	if attack_box.has_node("CollisionShape2D"):
 		attack_box.get_node("CollisionShape2D").disabled = true
 	
-	# Register this enemy with the GameManager
-	GameManager.register_enemy(self)
+	# Register this enemy with the EnemyManager
+	enemy_manager.register_enemy(self)
 
 func _physics_process(delta):
 	# Apply gravity if not on floor
@@ -270,7 +273,7 @@ func _handle_hit_state(delta):
 			idle_timer = 0.0
 
 func _handle_dead_state(_delta):
-		# Freeze horizontal movement
+	# Freeze horizontal movement
 	velocity.x = 0
 	
 	# We want to keep collision with the floor but disable other interactions
