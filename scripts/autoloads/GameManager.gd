@@ -168,7 +168,6 @@ func transition_to_scene(target_scene, target_door):
 			break
 	
 	# Find player and position them at the target door
-	var player = get_tree().get_first_node_in_group("player")
 	if player:
 		player.global_position = spawn_position
 	
