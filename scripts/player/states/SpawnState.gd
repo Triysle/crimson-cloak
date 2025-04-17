@@ -5,6 +5,7 @@ var fade_duration = 0.5
 var spawn_duration = 0.5
 var timer = 0.0
 var spawn_position = Vector2.ZERO
+var camera_smoothing_enabled = false
 
 func enter():
 	# Save original position for reference
@@ -12,6 +13,16 @@ func enter():
 	
 	# Move player up by spawn_height
 	player.global_position.y -= spawn_height
+	
+	# Temporary disable camera smoothing and force position
+	var camera = player.get_node("Camera2D")
+	if camera:
+		# Store current smoothing state
+		camera_smoothing_enabled = camera.position_smoothing_enabled
+		# Disable smoothing
+		camera.position_smoothing_enabled = false
+		# Force camera update
+		camera.reset_smoothing()
 	
 	# Set player as invisible initially through the shader
 	if player.sprite.material is ShaderMaterial:
@@ -54,6 +65,11 @@ func physics_update(delta):
 			player.sprite.material.set_shader_parameter("alpha_override", 1.0)
 		else:
 			player.modulate = Color(1, 1, 1, 1)
+		
+		# Re-enable camera smoothing
+		var camera = player.get_node("Camera2D")
+		if camera:
+			camera.position_smoothing_enabled = camera_smoothing_enabled
 		
 		# Transition to fall state to start normal gameplay
 		state_machine.transition_to("fall")

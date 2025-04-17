@@ -178,6 +178,20 @@ func transition_to_scene(target_scene, target_door_id):
 	player = get_tree().get_first_node_in_group("player")
 	if player:
 		player.global_position = spawn_position
+		
+		# Handle the camera positioning
+		var camera = player.get_node("Camera2D")
+		if camera:
+			# Disable smoothing
+			var smoothing_enabled = camera.position_smoothing_enabled
+			camera.position_smoothing_enabled = false
+			
+			# Force camera update
+			camera.reset_smoothing()
+			
+			# Schedule re-enabling smoothing after a short delay
+			await get_tree().create_timer(0.1).timeout
+			camera.position_smoothing_enabled = smoothing_enabled
 	else:
 		print("ERROR: Could not find player")
 	
