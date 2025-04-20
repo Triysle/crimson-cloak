@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cikgynx6ooius"
-path="res://.godot/imported/Decoratives.png-67ec0330a2bc356cd761ade8d3d00ce9.ctex"
+uid="uid://cdmi5fhhg1gdj"
+path="res://.godot/imported/VillageMain2.png-b7e08f3643ff2a6c7f4aef74be3ecac5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/env/SSW_CastlePack_v1.0/_PNG/Decoratives.png"
-dest_files=["res://.godot/imported/Decoratives.png-67ec0330a2bc356cd761ade8d3d00ce9.ctex"]
+source_file="res://assets/env/SSW_VP2_v1.01/_PNG/VillageMain2.png"
+dest_files=["res://.godot/imported/VillageMain2.png-b7e08f3643ff2a6c7f4aef74be3ecac5.ctex"]
 
 [params]
 

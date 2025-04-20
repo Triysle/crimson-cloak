@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byvybqufmni8"
-path="res://.godot/imported/MainLevBuild.png-8175ae36dbe064e750f862fac51d50e1.ctex"
+uid="uid://cm0frbe6wdren"
+path="res://.godot/imported/Deepdec_rocks_col1.png-cd963f08c293ca26d9526cfec61e6549.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/env/SSW_SET6_v1.0/!PNG/MainLevBuild.png"
-dest_files=["res://.godot/imported/MainLevBuild.png-8175ae36dbe064e750f862fac51d50e1.ctex"]
+source_file="res://assets/env/SSW_SET6_v1.0/!PNG/Deepdec_rocks_col1.png"
+dest_files=["res://.godot/imported/Deepdec_rocks_col1.png-cd963f08c293ca26d9526cfec61e6549.ctex"]
 
 [params]
 

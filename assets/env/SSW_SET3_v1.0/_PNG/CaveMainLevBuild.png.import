@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://derk7vjaej2t5"
-path="res://.godot/imported/Decoratives.png-1b84c49ff4898553c13c2eb410b0891f.ctex"
+uid="uid://cqign55bjmkq0"
+path="res://.godot/imported/CaveMainLevBuild.png-6c2840b19181aa24c12d3b52a45556f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/env/SSW_SET5_v1.0/_PNG/Decoratives.png"
-dest_files=["res://.godot/imported/Decoratives.png-1b84c49ff4898553c13c2eb410b0891f.ctex"]
+source_file="res://assets/env/SSW_SET3_v1.0/_PNG/CaveMainLevBuild.png"
+dest_files=["res://.godot/imported/CaveMainLevBuild.png-6c2840b19181aa24c12d3b52a45556f8.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dej2b7knfqqmh"
-path="res://.godot/imported/Decoratives.png-a6d11a5b5dd42fb260b027b74784a57f.ctex"
+uid="uid://b06o5glssygoe"
+path="res://.godot/imported/VillageMain1.png-752e951cfeb3c3cbf894c4424f5af51f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/env/SSW_SET3_v1.0/_PNG/Decoratives.png"
-dest_files=["res://.godot/imported/Decoratives.png-a6d11a5b5dd42fb260b027b74784a57f.ctex"]
+source_file="res://assets/env/SSW_VP1_v1.0/_PNG/VillageMain1.png"
+dest_files=["res://.godot/imported/VillageMain1.png-752e951cfeb3c3cbf894c4424f5af51f.ctex"]
 
 [params]
 

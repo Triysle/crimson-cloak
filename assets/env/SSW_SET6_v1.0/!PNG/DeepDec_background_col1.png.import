@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mkvvxu0h5rk2"
-path="res://.godot/imported/MainLevBuild.png-4c050bb2638a89181323aed706d70f86.ctex"
+uid="uid://b2rciuvn0rpc8"
+path="res://.godot/imported/DeepDec_background_col1.png-9a8f2f6eef970d22f12e1376d5be68d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/env/SSW_SET5_v1.0/_PNG/MainLevBuild.png"
-dest_files=["res://.godot/imported/MainLevBuild.png-4c050bb2638a89181323aed706d70f86.ctex"]
+source_file="res://assets/env/SSW_SET6_v1.0/!PNG/DeepDec_background_col1.png"
+dest_files=["res://.godot/imported/DeepDec_background_col1.png-9a8f2f6eef970d22f12e1376d5be68d4.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxax15ccbkl8q"
-path="res://.godot/imported/MainLevBuild.png-8567f35664f650500fff03675e38a70b.ctex"
+uid="uid://crnmtqyntwh4d"
+path="res://.godot/imported/HillsDecoratives.png-e380e4b9c0970abb563bb6a0520634e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/env/SSW_SET4_v1.0/_PNG/MainLevBuild.png"
-dest_files=["res://.godot/imported/MainLevBuild.png-8567f35664f650500fff03675e38a70b.ctex"]
+source_file="res://assets/env/SSWorlds_SET2_v1.0/_PNG/HillsDecoratives.png"
+dest_files=["res://.godot/imported/HillsDecoratives.png-e380e4b9c0970abb563bb6a0520634e2.ctex"]
 
 [params]
 

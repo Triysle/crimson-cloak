@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djtt42k08sxyu"
-path="res://.godot/imported/VP2_Interriors.png-84cae64a8ce15bdaa197b5e33c0f0fc1.ctex"
+uid="uid://bxax15ccbkl8q"
+path="res://.godot/imported/MineMainLevBuild.png-6f44e7db9f98a863fe68d304ff9428ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/env/SSW_VP2_v1.01/_PNG/VP2_Interriors.png"
-dest_files=["res://.godot/imported/VP2_Interriors.png-84cae64a8ce15bdaa197b5e33c0f0fc1.ctex"]
+source_file="res://assets/env/SSW_SET4_v1.0/_PNG/MineMainLevBuild.png"
+dest_files=["res://.godot/imported/MineMainLevBuild.png-6f44e7db9f98a863fe68d304ff9428ee.ctex"]
 
 [params]
 

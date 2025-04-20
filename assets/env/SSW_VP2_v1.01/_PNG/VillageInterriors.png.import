@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkqo6h04od3wt"
-path="res://.godot/imported/MainLevBuild.png-3aa8feaa931893dbe809cb2b73a5a7de.ctex"
+uid="uid://djtt42k08sxyu"
+path="res://.godot/imported/VillageInterriors.png-c3e82840d8dd834f1078022b8afa4410.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/env/SSW_CastlePack_v1.0/_PNG/MainLevBuild.png"
-dest_files=["res://.godot/imported/MainLevBuild.png-3aa8feaa931893dbe809cb2b73a5a7de.ctex"]
+source_file="res://assets/env/SSW_VP2_v1.01/_PNG/VillageInterriors.png"
+dest_files=["res://.godot/imported/VillageInterriors.png-c3e82840d8dd834f1078022b8afa4410.ctex"]
 
 [params]
 

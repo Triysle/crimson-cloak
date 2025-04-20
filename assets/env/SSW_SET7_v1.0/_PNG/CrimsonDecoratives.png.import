@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwlb4j5x0kdn2"
-path="res://.godot/imported/dec_rocks_col2.png-fe37fc618a67cc786ff8f91979112082.ctex"
+uid="uid://dkf1s5ql2m8te"
+path="res://.godot/imported/CrimsonDecoratives.png-c42e5fc2855fb3224615d8f79b9539ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/env/SSW_SET6_v1.0/!PNG/dec_rocks_col2.png"
-dest_files=["res://.godot/imported/dec_rocks_col2.png-fe37fc618a67cc786ff8f91979112082.ctex"]
+source_file="res://assets/env/SSW_SET7_v1.0/_PNG/CrimsonDecoratives.png"
+dest_files=["res://.godot/imported/CrimsonDecoratives.png-c42e5fc2855fb3224615d8f79b9539ed.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhyl84ohsg02x"
-path="res://.godot/imported/Dec_background_col2.png-e6c3f85ec0a812138ca85b5478e99ef8.ctex"
+uid="uid://mkvvxu0h5rk2"
+path="res://.godot/imported/SnowMainLevBuild.png-94944a86db018b9eab9b36d461b94964.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/env/SSW_SET6_v1.0/!PNG/Dec_background_col2.png"
-dest_files=["res://.godot/imported/Dec_background_col2.png-e6c3f85ec0a812138ca85b5478e99ef8.ctex"]
+source_file="res://assets/env/SSW_SET5_v1.0/_PNG/SnowMainLevBuild.png"
+dest_files=["res://.godot/imported/SnowMainLevBuild.png-94944a86db018b9eab9b36d461b94964.ctex"]
 
 [params]
 

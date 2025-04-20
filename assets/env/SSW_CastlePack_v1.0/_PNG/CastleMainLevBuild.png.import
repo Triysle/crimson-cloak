@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2rciuvn0rpc8"
-path="res://.godot/imported/Dec_background_col1.png-36a4969044b6443382580eb3ecafe4a1.ctex"
+uid="uid://dkqo6h04od3wt"
+path="res://.godot/imported/CastleMainLevBuild.png-57ebdad15afc51601cbed12d07c6228a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/env/SSW_SET6_v1.0/!PNG/Dec_background_col1.png"
-dest_files=["res://.godot/imported/Dec_background_col1.png-36a4969044b6443382580eb3ecafe4a1.ctex"]
+source_file="res://assets/env/SSW_CastlePack_v1.0/_PNG/CastleMainLevBuild.png"
+dest_files=["res://.godot/imported/CastleMainLevBuild.png-57ebdad15afc51601cbed12d07c6228a.ctex"]
 
 [params]
 

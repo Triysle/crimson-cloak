@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctjqkna3if6sx"
-path="res://.godot/imported/MainBackTile.png-63e8e54961ad1c2735ba3e6715b12c26.ctex"
+uid="uid://dwlb4j5x0kdn2"
+path="res://.godot/imported/Deepdec_rocks_col2.png-c192a066efd5368026d9db7daf94c830.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/env/SSW_SET4_v1.0/_PNG/MainBackTile.png"
-dest_files=["res://.godot/imported/MainBackTile.png-63e8e54961ad1c2735ba3e6715b12c26.ctex"]
+source_file="res://assets/env/SSW_SET6_v1.0/!PNG/Deepdec_rocks_col2.png"
+dest_files=["res://.godot/imported/Deepdec_rocks_col2.png-c192a066efd5368026d9db7daf94c830.ctex"]
 
 [params]
 

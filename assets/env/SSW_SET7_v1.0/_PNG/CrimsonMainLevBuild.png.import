@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqign55bjmkq0"
-path="res://.godot/imported/MainLevBuild.png-1d690e0b56e23a12e4c6f12db11bdae6.ctex"
+uid="uid://ftsqgi0vj883"
+path="res://.godot/imported/CrimsonMainLevBuild.png-8dd9ae63a2f4f26ff40e9867964babaf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/env/SSW_SET3_v1.0/_PNG/MainLevBuild.png"
-dest_files=["res://.godot/imported/MainLevBuild.png-1d690e0b56e23a12e4c6f12db11bdae6.ctex"]
+source_file="res://assets/env/SSW_SET7_v1.0/_PNG/CrimsonMainLevBuild.png"
+dest_files=["res://.godot/imported/CrimsonMainLevBuild.png-8dd9ae63a2f4f26ff40e9867964babaf.ctex"]
 
 [params]
 

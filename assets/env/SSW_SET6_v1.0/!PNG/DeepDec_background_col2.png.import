@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crnmtqyntwh4d"
-path="res://.godot/imported/Decoratives.png-6b094dc760c855568e44d3a869e4b372.ctex"
+uid="uid://bhyl84ohsg02x"
+path="res://.godot/imported/DeepDec_background_col2.png-bf846f2510cb8fb3b8ab21b2de103fa9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/env/SSWorlds_SET2_v1.0/_PNG/Decoratives.png"
-dest_files=["res://.godot/imported/Decoratives.png-6b094dc760c855568e44d3a869e4b372.ctex"]
+source_file="res://assets/env/SSW_SET6_v1.0/!PNG/DeepDec_background_col2.png"
+dest_files=["res://.godot/imported/DeepDec_background_col2.png-bf846f2510cb8fb3b8ab21b2de103fa9.ctex"]
 
 [params]
 

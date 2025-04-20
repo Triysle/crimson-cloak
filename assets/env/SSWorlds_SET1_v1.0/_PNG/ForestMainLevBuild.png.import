@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgvwebadlf4ln"
-path="res://.godot/imported/Decoratives.png-25d75148f1e0aeb4a38520777aabb34c.ctex"
+uid="uid://boldupdtq48ij"
+path="res://.godot/imported/ForestMainLevBuild.png-6cb4efb3e10f38b8b7ff3741c8094216.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/env/SSWorlds_SET1_v1.0/_PNG/Decoratives.png"
-dest_files=["res://.godot/imported/Decoratives.png-25d75148f1e0aeb4a38520777aabb34c.ctex"]
+source_file="res://assets/env/SSWorlds_SET1_v1.0/_PNG/ForestMainLevBuild.png"
+dest_files=["res://.godot/imported/ForestMainLevBuild.png-6cb4efb3e10f38b8b7ff3741c8094216.ctex"]
 
 [params]
 
