@@ -6,12 +6,23 @@ extends CharacterBody2D
 @export var acceleration: float = 2000.0
 @export var friction: float = 1000.0
 
-#Player stats
+# Player stats
 @export var max_health: int = 100
 @export var health: int = 100
 @export var max_healing_charges: int = 5
 @export var healing_charges: int = 1
 @export var healing_amount: int = 25
+
+# Additional player variables for new features
+var gravity_enabled: bool = true  # Whether gravity should be applied (disabled during climbing)
+var can_ledge_grab: bool = true   # Whether player can grab ledges
+var stamina: float = 100.0        # Stamina for hanging and special moves
+var max_stamina: float = 100.0    # Maximum stamina
+var stamina_regen_rate: float = 10.0  # Stamina regeneration per second
+
+# Ledge grabbing variables
+var ledge_grab_cooldown = 0.5     # Time before grabbing the same ledge again
+var ledge_grab_timer = 0.0        # Timer for ledge grab cooldown
 
 # References to managers
 @onready var player_manager = get_node("/root/PlayerManager")
@@ -26,7 +37,11 @@ var original_radius: float = 0.0  # slide state vars
 var original_height: float = 0.0  # slide state vars
 var original_position: Vector2 = Vector2.ZERO  # slide state vars
 var hit_direction = 1.0  # Direction the player was hit from (positive = right, negative = left)
-var can_control = true   # Whether the player dcan be controlled (disabled during hurt state)
+var can_control = true   # Whether the player can be controlled (disabled during hurt state)
+
+# Ladder detection variables
+var current_ladder = null          # Reference to the ladder being climbed
+var ladder_overlap_count = 0       # Count of ladders player is overlapping
 
 # Debug variables
 var debug_timer = 0.0
@@ -43,10 +58,18 @@ var hud = null
 const DustEffect = preload("res://scenes/player/DustEffect.tscn")
 
 func _ready():
+	# Set up attack box connection
 	var attack_box = $AttackBox
-	
 	if attack_box and !attack_box.body_entered.is_connected(_on_attack_box_body_entered):
 		attack_box.body_entered.connect(_on_attack_box_body_entered)
+
+	# Set up ledge detector
+	var ledge_detector = $LedgeDetector
+	if ledge_detector:
+		if !ledge_detector.ledge_detected.is_connected(_on_ledge_detected):
+			ledge_detector.connect("ledge_detected", _on_ledge_detected)
+		if !ledge_detector.ledge_exited.is_connected(_on_ledge_exited):
+			ledge_detector.connect("ledge_exited", _on_ledge_exited)
 
 	# Find the HUD in the scene
 	await get_tree().process_frame
@@ -60,15 +83,27 @@ func _ready():
 		hud.update_health(health, max_health)
 		hud.update_currency(currency)
 		hud.update_healing_charges(healing_charges, max_healing_charges)
+		if hud.has_method("update_stamina"):
+			hud.update_stamina(stamina, max_stamina)
 
-# Debug function to help see what's happening
-func _process(_delta):
-	pass
+# Process function for more UI-related updates
+func _process(delta):
+	# Update stamina regeneration when not in certain states
+	var current_state = state_machine.current_state.name.to_lower()
+	if not (current_state == "ledgegrab" or current_state == "climb"):
+		regenerate_stamina(delta)
+	
+	# Update ledge grab cooldown timer
+	if ledge_grab_timer > 0:
+		ledge_grab_timer -= delta
 
-# The physics_process is now much simpler as states handle the logic
-func _physics_process(_delta):
-	pass	
+# Physics process function
+func _physics_process(delta):
+	# Apply gravity if enabled and not on floor
+	if gravity_enabled and not is_on_floor():
+		velocity.y += gravity * delta
 
+# Function to make the player drop through one-way platforms
 func fall_through_platforms():
 	# Set velocity downward to start falling
 	velocity.y = 10
@@ -82,9 +117,19 @@ func fall_through_platforms():
 	# Force platform detection to update
 	move_and_slide()
 
+# Function to handle taking damage
 func take_damage(amount: int, attacker_position: Vector2 = Vector2.ZERO):
+	# Get the current state
+	var current_state = state_machine.current_state.name.to_lower()
+	
+	# Check if player is currently blocking
+	if current_state == "block" or current_state == "crouchblock":
+		# Use the block state's damage handling
+		state_machine.current_state.take_block_damage(amount, attacker_position)
+		return
+	
 	# Skip damage if player is already in hurt state
-	if state_machine.current_state.name.to_lower() == "hurt":
+	if current_state == "hurt":
 		return
 		
 	health -= amount
@@ -111,11 +156,12 @@ func take_damage(amount: int, attacker_position: Vector2 = Vector2.ZERO):
 	# If not dead, transition to hurt state
 	state_machine.transition_to("hurt")
 
+# Handle animation finished events
 func _on_animation_player_animation_finished(anim_name):
 	# Check if it's an attack animation that finished
 	if anim_name.begins_with("attack"):
 		# Check if we're in the attack state
-		if state_machine.current_state.name == "Attack":
+		if state_machine.current_state.name.to_lower() == "attack":
 			var attack_state = state_machine.states["attack"]
 			# Try to continue to next combo
 			if not attack_state.next_combo():
@@ -124,6 +170,92 @@ func _on_animation_player_animation_finished(anim_name):
 					state_machine.transition_to("idle")
 				else:
 					state_machine.transition_to("fall")
+
+# Function for ledge grabbing
+func _on_ledge_detected(ledge_position):
+	# Only grab ledges if we're in the right state
+	if can_ledge_grab and ledge_grab_timer <= 0 and state_machine.current_state.name.to_lower() in ["jump", "fall", "doublejump"]:
+		# Set the ledge position in the ledge grab state
+		if state_machine.states.has("ledgegrab"):
+			var ledge_state = state_machine.states["ledgegrab"]
+			ledge_state.set_ledge_position(ledge_position)
+			
+			# Transition to ledge grab state
+			state_machine.transition_to("ledgegrab")
+			
+			# Spawn dust effect for grabbing
+			spawn_dust_effect("jump")
+
+func _on_ledge_exited():
+	# Reset ledge detection
+	ledge_grab_timer = ledge_grab_cooldown
+
+func release_ledge():
+	# Start the cooldown timer
+	ledge_grab_timer = ledge_grab_cooldown
+	
+	# Reset the ledge detector
+	var ledge_detector = $LedgeDetector
+	if ledge_detector and ledge_detector.has_method("reset_detection"):
+		ledge_detector.reset_detection()
+
+# Function to start climbing a ladder
+func start_climbing(ladder):
+	if state_machine.states.has("climb"):
+		current_ladder = ladder
+		var climb_state = state_machine.states["climb"]
+		climb_state.set_ladder(ladder)
+		
+		# Transition to climb state
+		state_machine.transition_to("climb")
+
+# Function to stop climbing
+func stop_climbing():
+	current_ladder = null
+	
+	# Transition to appropriate state based on whether player is on floor
+	if is_on_floor():
+		state_machine.transition_to("idle")
+	else:
+		state_machine.transition_to("fall")
+
+# Stamina functions
+func drain_stamina(amount: float):
+	stamina = max(0, stamina - amount)
+	
+	# Update stamina UI if available
+	if hud and hud.has_method("update_stamina"):
+		hud.update_stamina(stamina, max_stamina)
+
+func regenerate_stamina(delta: float):
+	if stamina < max_stamina:
+		stamina = min(max_stamina, stamina + stamina_regen_rate * delta)
+		
+		# Update stamina UI if available
+		if hud and hud.has_method("update_stamina"):
+			hud.update_stamina(stamina, max_stamina)
+
+# Connect to ladder area
+func _on_ladder_detector_area_entered(area):
+	if area.is_in_group("ladder"):
+		ladder_overlap_count += 1
+		
+		# Store reference to the ladder
+		if current_ladder == null:
+			current_ladder = area
+
+func _on_ladder_detector_area_exited(area):
+	if area.is_in_group("ladder"):
+		ladder_overlap_count -= 1
+		
+		# If no more ladders, clear the reference
+		if ladder_overlap_count <= 0:
+			ladder_overlap_count = 0
+			current_ladder = null
+			
+			# If currently climbing, stop climbing
+			if state_machine.current_state.name.to_lower() == "climb":
+				stop_climbing()
 
 func _on_attack_box_body_entered(body):
 	print("Attack box hit: ", body.name)
@@ -219,6 +351,10 @@ func _input(event):
 	# Check for healing input
 	if event.is_action_pressed("heal"):
 		use_healing()
+		
+	# Check for ladder climbing
+	if current_ladder and event.is_action_pressed("move_up"):
+		start_climbing(current_ladder)
 		
 	# Debug suicide button
 	if event.is_action_pressed("debug_die"):

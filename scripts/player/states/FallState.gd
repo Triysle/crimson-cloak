@@ -29,6 +29,13 @@ func physics_update(delta):
 		state_machine.transition_to("doublejump")
 		return
 	
+	# Check for ladder climbing
+	if player.current_ladder and Input.is_action_pressed("move_up"):
+		state_machine.transition_to("climb")
+		return
+	
+	# No need to explicitly check for ledge grabbing here, as it's handled by signals from LedgeDetector
+	
 	if direction != 0:
 		# Apply acceleration (but slightly reduced in air)
 		player.velocity.x = move_toward(player.velocity.x, direction * player.speed * 0.8, player.acceleration * delta * 0.8)
@@ -45,6 +52,11 @@ func physics_update(delta):
 	# Handle attack input in mid-air
 	if Input.is_action_just_pressed("attack"):
 		state_machine.transition_to("attack")
+		return
+	
+	# Handle block input in mid-air (if allowed)
+	if Input.is_action_just_pressed("block") and player.has_node("BlockState") and player.get_node("BlockState").can_block_in_air:
+		state_machine.transition_to("block")
 		return
 	
 	# Apply movement

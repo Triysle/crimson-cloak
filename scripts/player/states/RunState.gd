@@ -36,6 +36,21 @@ func physics_update(delta):
 		state_machine.transition_to("idle")
 		return
 	
+	# Check for crouch input
+	if Input.is_action_just_pressed("move_down"):
+		state_machine.transition_to("crouch")
+		return
+	
+	# Check for block input
+	if Input.is_action_just_pressed("block"):
+		state_machine.transition_to("block")
+		return
+	
+	# Check for ladder climbing
+	if player.current_ladder and Input.is_action_pressed("move_up"):
+		state_machine.transition_to("climb")
+		return
+	
 	# Handle jump
 	if Input.is_action_just_pressed("jump"):
 		player.velocity.y = player.jump_velocity
