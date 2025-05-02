@@ -10,7 +10,7 @@ func enter():
 	slide_timer = 0
 	
 	# Store original collision shape size for later restoration
-	var collision_shape = player.get_node("CollisionShape2D")
+	var collision_shape = player.get_node("NormalCollider")
 	player.original_height = collision_shape.shape.height
 	player.original_position = collision_shape.position
 	player.original_radius = collision_shape.shape.radius
@@ -35,7 +35,7 @@ func enter():
 
 func exit():
 	# Restore original collision shape size and position
-	var collision_shape = player.get_node("CollisionShape2D")
+	var collision_shape = player.get_node("NormalCollider")
 	collision_shape.shape.height = player.original_height
 	collision_shape.shape.radius = player.original_radius
 	collision_shape.position = player.original_position

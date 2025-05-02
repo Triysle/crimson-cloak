@@ -57,6 +57,15 @@ func _ready():
 	var attack_box = $AttackBox
 	if attack_box and !attack_box.body_entered.is_connected(_on_attack_box_body_entered):
 		attack_box.body_entered.connect(_on_attack_box_body_entered)
+	
+	# Set up collision shapes for crouching
+	var crouch_collider = $CrouchCollider
+	var normal_collider = $NormalCollider
+	
+	if crouch_collider and normal_collider:
+		# Make sure only the normal collider is enabled at start
+		normal_collider.disabled = false
+		crouch_collider.disabled = true
 
 	# Find the HUD in the scene
 	await get_tree().process_frame

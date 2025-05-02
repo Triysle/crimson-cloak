@@ -30,7 +30,7 @@ func exit():
 	reaching_top = false
 	at_ladder_bottom = false
 
-func physics_update(delta):
+func physics_update(_delta):
 	# Skip input processing if player can't be controlled
 	if not player.can_control:
 		return

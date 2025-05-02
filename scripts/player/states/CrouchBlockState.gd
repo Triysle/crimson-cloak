@@ -2,33 +2,21 @@ extends State
 
 var block_reduction = 0.9  # 90% damage reduction when blocking
 var block_knockback_speed = 150.0  # Knockback speed when hit while crouching and blocking
-var original_height: float = 0
-var original_position: Vector2 = Vector2.ZERO
-var crouch_height_reduction = 0.5  # 50% of original height
 
 func enter():
 	player.animation_player.play("crouchblock")
 	
-	# Store original collision shape properties
-	var collision_shape = player.get_node("CollisionShape2D")
-	original_height = collision_shape.shape.height
-	original_position = collision_shape.position
-	
-	# Reduce collision shape height for crouching
-	collision_shape.shape.height = original_height * crouch_height_reduction
-	
-	# Move the collision shape up to keep the feet at the same level
-	var height_diff = original_height - collision_shape.shape.height
-	collision_shape.position.y = original_position.y - height_diff / 2
+	# Switch collision shapes
+	player.get_node("NormalCollider").disabled = true
+	player.get_node("CrouchCollider").disabled = false
 	
 	# Stop horizontal movement when crouching and blocking
 	player.velocity.x = 0
 
 func exit():
-	# Restore original collision shape properties
-	var collision_shape = player.get_node("CollisionShape2D")
-	collision_shape.shape.height = original_height
-	collision_shape.position = original_position
+	# Switch back to normal collision shape
+	player.get_node("NormalCollider").disabled = false
+	player.get_node("CrouchCollider").disabled = true
 
 func physics_update(delta):
 	# Skip input processing if player can't be controlled
@@ -69,7 +57,7 @@ func take_block_damage(amount: int, attacker_position: Vector2):
 	
 	# Update the HUD
 	if player.hud:
-		player.hud.update_health(player.health, max(0, player.health))
+		player.hud.update_health(player.health, player.max_health)
 	
 	# Calculate knockback direction
 	var knockback_dir = sign(player.global_position.x - attacker_position.x)
@@ -88,20 +76,22 @@ func take_block_damage(amount: int, attacker_position: Vector2):
 
 # Function to check if there's enough space to stand up
 func is_blocked_above() -> bool:
-	# Create a shape cast to check above the player
+	# Check if normal collider would intersect with something if enabled
+	var normal_collider = player.get_node("NormalCollider")
+	
+	# Current position and rotation of the player
+	var global_transform = player.global_transform
+	
+	# Create a direct space state query
 	var space_state = player.get_world_2d().direct_space_state
 	var query = PhysicsShapeQueryParameters2D.new()
 	
-	# Copy the player's collision shape
-	var collision_shape = player.get_node("CollisionShape2D")
-	query.set_shape(collision_shape.shape)
-	
-	# Position the shape at the standing height
-	var standing_position = player.global_position
-	query.transform = Transform2D(0, standing_position)
+	# Use the normal collider's shape
+	query.set_shape(normal_collider.shape)
+	query.transform = global_transform * normal_collider.transform
 	
 	# Only collide with the world layer
-	query.collision_mask = 1  # Layer 1 is typically world
+	query.collision_mask = 1  # Assuming world is on layer 1
 	
 	# Exclude the player itself
 	query.exclude = [player]

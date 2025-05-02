@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://bryfivf4t1wgy"]
+[gd_scene load_steps=66 format=3 uid="uid://bryfivf4t1wgy"]
 
 [ext_resource type="Script" uid="uid://caki06lsipjvu" path="res://scripts/player/Player.gd" id="1_v6fml"]
 [ext_resource type="Texture2D" uid="uid://cflg4c8he333p" path="res://assets/player/SS_Game_Player_v.1.0/idle/idle.png" id="2_3li8b"]
@@ -43,6 +43,9 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8vuu"]
 radius = 8.0
 height = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a4b0l"]
+radius = 8.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b8lor"]
 shader = ExtResource("3_b8lor")
@@ -1016,7 +1019,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_kk601"]
 resource_name = "blockknockback"
-length = 0.6
+length = 0.5
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -1062,10 +1065,10 @@ tracks/3/path = NodePath("Sprite2D:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5]
+"values": [0, 1, 2, 3, 4]
 }
 
 [sub_resource type="Animation" id="Animation_p3v13"]
@@ -1213,9 +1216,13 @@ max_healing_charges = 1
 [node name="ShadowTrail" type="Node2D" parent="."]
 script = ExtResource("2_61ith")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="NormalCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_u8vuu")
+
+[node name="CrouchCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_a4b0l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_b8lor")

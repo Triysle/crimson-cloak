@@ -13,7 +13,7 @@ func exit():
 	# Reset any block-specific properties if needed
 	pass
 	
-func update(delta):
+func update(_delta):
 	# Handle any continuous effects or animations here
 	pass
 
@@ -71,7 +71,7 @@ func take_block_damage(amount: int, attacker_position: Vector2):
 	
 	# Update the HUD
 	if player.hud:
-		player.hud.update_health(player.health, max(0, player.health))
+		player.hud.update_health(player.health, player.max_health)
 	
 	# Calculate knockback direction
 	var knockback_dir = sign(player.global_position.x - attacker_position.x)
