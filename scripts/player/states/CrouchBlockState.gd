@@ -32,6 +32,15 @@ func physics_update(delta):
 	# Keep player in place (no horizontal movement while crouching and blocking)
 	player.velocity.x = 0
 	
+	# Check for directional input to change facing direction while blocking
+	var direction = Input.get_axis("move_left", "move_right")
+	if direction != 0:
+		# Update player facing direction without moving
+		if direction > 0:
+			player.sprite.flip_h = false
+		elif direction < 0:
+			player.sprite.flip_h = true
+	
 	# Check if block is released
 	if not Input.is_action_pressed("block"):
 		state_machine.transition_to("crouch")

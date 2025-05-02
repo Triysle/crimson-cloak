@@ -24,6 +24,15 @@ func physics_update(delta):
 	if not player.is_on_floor():
 		player.velocity.y += player.gravity * delta
 	
+	# Check for directional input to change facing direction while crouching
+	var direction = Input.get_axis("move_left", "move_right")
+	if direction != 0:
+		# Update player facing direction without moving
+		if direction > 0:
+			player.sprite.flip_h = false
+		elif direction < 0:
+			player.sprite.flip_h = true
+	
 	# Keep player movement minimal while crouching
 	player.velocity.x = move_toward(player.velocity.x, 0, player.friction * delta)
 	
