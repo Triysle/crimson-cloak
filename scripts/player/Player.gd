@@ -73,13 +73,6 @@ func _ready():
 		if hud.has_method("update_stamina"):
 			hud.update_stamina(stamina, max_stamina)
 
-# Process function for more UI-related updates
-func _process(delta):
-	# Update stamina regeneration when not in certain states
-	var current_state = state_machine.current_state.name.to_lower()
-	if not (current_state == "ledgegrab" or current_state == "climb"):
-		regenerate_stamina(delta)
-
 # Physics process function
 func _physics_process(delta):
 	# Apply gravity if enabled and not on floor
