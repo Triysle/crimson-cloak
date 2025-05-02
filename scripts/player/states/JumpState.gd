@@ -32,10 +32,6 @@ func physics_update(delta):
 		state_machine.transition_to("climb")
 		return
 	
-	# Check for ledge grabbing
-	if player.can_ledge_grab and player.check_ledge_grab():
-		return  # The player.check_ledge_grab function handles the state transition
-	
 	if direction != 0:
 		# Apply acceleration (but maybe slightly reduced in air)
 		player.velocity.x = move_toward(player.velocity.x, direction * player.speed * 0.8, player.acceleration * delta * 0.8)

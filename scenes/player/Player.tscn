@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://bryfivf4t1wgy"]
+[gd_scene load_steps=65 format=3 uid="uid://bryfivf4t1wgy"]
 
 [ext_resource type="Script" uid="uid://caki06lsipjvu" path="res://scripts/player/Player.gd" id="1_v6fml"]
 [ext_resource type="Texture2D" uid="uid://cflg4c8he333p" path="res://assets/player/SS_Game_Player_v.1.0/idle/idle.png" id="2_3li8b"]
@@ -39,8 +39,6 @@
 [ext_resource type="Script" uid="uid://yac83ouri54u" path="res://scripts/player/states/ClimbState.gd" id="36_pysui"]
 [ext_resource type="Script" uid="uid://b6kwkcbfdq0lm" path="res://scripts/player/states/CrouchBlockState.gd" id="37_4ntn1"]
 [ext_resource type="Script" uid="uid://buyyboo5ymsdi" path="res://scripts/player/states/CrouchState.gd" id="38_gtkor"]
-[ext_resource type="Script" uid="uid://bjgpfptnkhs6q" path="res://scripts/player/states/LedgeGrabState.gd" id="39_wslmf"]
-[ext_resource type="Script" uid="uid://d37g6pfjykgqc" path="res://scripts/player/LedgeDetector.gd" id="41_pysui"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8vuu"]
 radius = 8.0
@@ -1206,9 +1204,6 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_sfy4j"]
 radius = 16.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u3hyo"]
-size = Vector2(32, 16)
-
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 texture_filter = 1
 collision_layer = 2
@@ -1297,16 +1292,6 @@ script = ExtResource("37_4ntn1")
 [node name="Crouch" type="Node" parent="StateMachine"]
 script = ExtResource("38_gtkor")
 
-[node name="LedgeGrab" type="Node" parent="StateMachine"]
-script = ExtResource("39_wslmf")
-
 [node name="HUD" parent="." instance=ExtResource("21_gv3ic")]
-
-[node name="LedgeDetector" type="Area2D" parent="."]
-script = ExtResource("41_pysui")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LedgeDetector"]
-position = Vector2(0, -24)
-shape = SubResource("RectangleShape2D_u3hyo")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

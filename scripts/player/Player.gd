@@ -15,14 +15,9 @@ extends CharacterBody2D
 
 # Additional player variables for new features
 var gravity_enabled: bool = true  # Whether gravity should be applied (disabled during climbing)
-var can_ledge_grab: bool = true   # Whether player can grab ledges
 var stamina: float = 100.0        # Stamina for hanging and special moves
 var max_stamina: float = 100.0    # Maximum stamina
 var stamina_regen_rate: float = 10.0  # Stamina regeneration per second
-
-# Ledge grabbing variables
-var ledge_grab_cooldown = 0.5     # Time before grabbing the same ledge again
-var ledge_grab_timer = 0.0        # Timer for ledge grab cooldown
 
 # References to managers
 @onready var player_manager = get_node("/root/PlayerManager")
@@ -63,14 +58,6 @@ func _ready():
 	if attack_box and !attack_box.body_entered.is_connected(_on_attack_box_body_entered):
 		attack_box.body_entered.connect(_on_attack_box_body_entered)
 
-	# Set up ledge detector
-	var ledge_detector = $LedgeDetector
-	if ledge_detector:
-		if !ledge_detector.ledge_detected.is_connected(_on_ledge_detected):
-			ledge_detector.connect("ledge_detected", _on_ledge_detected)
-		if !ledge_detector.ledge_exited.is_connected(_on_ledge_exited):
-			ledge_detector.connect("ledge_exited", _on_ledge_exited)
-
 	# Find the HUD in the scene
 	await get_tree().process_frame
 	hud = get_tree().get_first_node_in_group("hud")
@@ -92,10 +79,6 @@ func _process(delta):
 	var current_state = state_machine.current_state.name.to_lower()
 	if not (current_state == "ledgegrab" or current_state == "climb"):
 		regenerate_stamina(delta)
-	
-	# Update ledge grab cooldown timer
-	if ledge_grab_timer > 0:
-		ledge_grab_timer -= delta
 
 # Physics process function
 func _physics_process(delta):
@@ -170,34 +153,6 @@ func _on_animation_player_animation_finished(anim_name):
 					state_machine.transition_to("idle")
 				else:
 					state_machine.transition_to("fall")
-
-# Function for ledge grabbing
-func _on_ledge_detected(ledge_position):
-	# Only grab ledges if we're in the right state
-	if can_ledge_grab and ledge_grab_timer <= 0 and state_machine.current_state.name.to_lower() in ["jump", "fall", "doublejump"]:
-		# Set the ledge position in the ledge grab state
-		if state_machine.states.has("ledgegrab"):
-			var ledge_state = state_machine.states["ledgegrab"]
-			ledge_state.set_ledge_position(ledge_position)
-			
-			# Transition to ledge grab state
-			state_machine.transition_to("ledgegrab")
-			
-			# Spawn dust effect for grabbing
-			spawn_dust_effect("jump")
-
-func _on_ledge_exited():
-	# Reset ledge detection
-	ledge_grab_timer = ledge_grab_cooldown
-
-func release_ledge():
-	# Start the cooldown timer
-	ledge_grab_timer = ledge_grab_cooldown
-	
-	# Reset the ledge detector
-	var ledge_detector = $LedgeDetector
-	if ledge_detector and ledge_detector.has_method("reset_detection"):
-		ledge_detector.reset_detection()
 
 # Function to start climbing a ladder
 func start_climbing(ladder):

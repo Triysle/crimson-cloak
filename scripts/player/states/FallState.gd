@@ -34,8 +34,6 @@ func physics_update(delta):
 		state_machine.transition_to("climb")
 		return
 	
-	# No need to explicitly check for ledge grabbing here, as it's handled by signals from LedgeDetector
-	
 	if direction != 0:
 		# Apply acceleration (but slightly reduced in air)
 		player.velocity.x = move_toward(player.velocity.x, direction * player.speed * 0.8, player.acceleration * delta * 0.8)
